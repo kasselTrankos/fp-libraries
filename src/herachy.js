@@ -9,13 +9,12 @@ var users = [
   {id: 8, type: 'boss', name: 'aleja'},
   {id: 9, type: 'highest', name: 'elisa', parent: 8},
   {id: 10, type: 'highest', name: 'leonor', parent: 8},
+  {id: 11, type: 'normal', name: 'sandra', parent: 7},
+  {id: 12, type: 'normal', name: 'raquel', parent: 9},
 
 ];
 const prop = k => o => o[k];
 const is = value => prop => el => value === prop(el) ? el.id : false;
-var Maybe = function(val) {
-  this.__value = val;
-};
 const Herachy = function (val) {
   
   this.__value = val;
@@ -29,13 +28,11 @@ Herachy.of = function(val) {
 Herachy.prototype.isNothing = function() {
   return (this.__value === null || this.__value === undefined);
 };
-const def = x => typeof x !== 'undefined';
-Herachy.prototype.filter = function(f) {
+Herachy.prototype.children = function(f) {
   const filter = this.__value.reduce((accu, current, i, array)  => {
     const parentId = f(current);
     if (parentId) {
-      current.children = array.filter(child => child.parent === parentId);
-      accu.push(current);
+      accu.push(...array.filter(child => child.parent === parentId));
     }
     return accu;
   }, []);
@@ -44,8 +41,9 @@ Herachy.prototype.filter = function(f) {
 };
 const getHerachy = () => {
   var yt = Herachy.of(users)
-    .filter(is('boss')(prop('type')))
+    .children(is('high')(prop('type')))
+
     .join();
-  console.log('nmnm=>', yt.length, '<== mmfmf');
+  console.log('nmnm=>', yt, '<== mmfmf');
 }
 export {getHerachy};
