@@ -1,4 +1,8 @@
 import compose from 'lodash/fp/compose';
+import Center from './center';
+import Right from './right';
+import Left from './left';
+
 
 const not = value => !value;
 const buildPageObject  = page => ({current: page, text: String(page)});
