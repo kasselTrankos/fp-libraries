@@ -23,12 +23,6 @@ module.exports = {
                 include: path.join(__dirname, 'src')
             },
             {
-                test: /\.scss/,
-                loader: 'style!css!sass',
-                // Or
-                loaders: ['style', 'css', 'sass'],
-            },
-            {
                 test: /\.html/,
                 loader: 'html',
             },
@@ -38,10 +32,6 @@ module.exports = {
               include: [
                 path.resolve(__dirname, './index.html'),
               ],
-            },
-            {
-              test: /\.html$/,  
-              loader: 'polymer-webpack-loader'
             },
             { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
             { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
