@@ -1,14 +1,14 @@
-class Left {
-  constructor(val) {
-    this._val = val;
+import Page from './page';
+export default  class Left extends Page {
+  constructor(page, text) {
+    super(page, text);
   }
   map() {
-      // Left is the sad path
+      // Right is the sad path
       // so we do nothing
-      return new Left('»');
+      return this;
   }
   toString() {
-      const str = this._val.toString();
-      return `Left(${str})`;
+      return `Left(${this.page.toString()}, ${this.text.toString()})`;
   }
-} 
+}

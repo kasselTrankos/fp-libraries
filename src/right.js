@@ -1,14 +1,14 @@
-class Right {
-  constructor(val) {
-    this._val = val;
+import Page from './page';
+export default class Right extends Page {
+  constructor(page, text) {
+    super(page, text);
   }
   map() {
       // Right is the sad path
       // so we do nothing
-      return new Right('»');
+      return this;
   }
   toString() {
-      const str = this._val.toString();
-      return `Right(${str})`;
+      return `Right(${this.page.toString()}, ${this.text.toString()})`;
   }
 }

@@ -1,14 +1,15 @@
+import Page from './page';
 class Center {
-  constructor(val) {
-    this._val = val;
+  constructor(page, text) {
+    super.constructor(page, text);
   }
   map(fn) {
-      return new Center(
-          fn(this._val)
-      );
+    return new Center(
+        fn(this._val)
+    );
   }
   toString() {
-      const str = this._val.toString();
-      return `Center(${str})`;
+      const str = this._page.toString();
+      return `Page(${this._page.toString()}, ${this._text.toString()})`;
   }
 }

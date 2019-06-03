@@ -6,10 +6,10 @@ import Left from './left';
 
 const not = value => !value;
 const buildPageObject  = page => ({current: page, text: String(page)});
-const first = () => [Object.assign(buildPageObject(1), {text: '«'})];
-const previous = page => [Object.assign(buildPageObject(--page), {text: '‹'})];
-const last = pages  => [Object.assign(buildPageObject(pages), {text: '»'})];
-const next = page => [Object.assign(buildPageObject(++page), {text: '›'})];
+const first = () => [new Left(1, '«')];
+const previous = page => [new Left(--page, '‹')];
+const last = pages  => [new Right(pages, '»')];
+const next = page => [new Right(++page, '›')];
 const getSize = total => limit => Math.ceil(total / limit);
 const isLessThan = max => value => value < max; 
 const isAtEndPostion  = total => size => page => compose(isLessThan(page), getBegin(size))(total);
@@ -35,15 +35,17 @@ const getPaginationRight = pages => size => page =>
   gotPaginationRight(pages)(size)(page) ? [].concat(next(page), last(pages)) : [];
 
 const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1)  =>{
-  const pagination = getCountPagination(total)(size)(limit);
+  const count = getCountPagination(total)(size)(limit);
   const pages = getCountPages(total)(size)(limit)(pagination);
+  console.log(pages);
+  /// here start the tree decissor
   return [].concat(
     getPaginationLeft(pages)(size)(page),
-    compose(getPages(pagination), getStart(page)(size), getSize(total))(limit), 
+    compose(getPages(count), getStart(page)(size), getSize(total))(limit), 
     getPaginationRight(pages)(size)(page)
   );
 }
 
 
 
-export {getPagination};
+export {getPagination, first, previous, last, next};
