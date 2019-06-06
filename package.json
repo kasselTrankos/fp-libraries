@@ -32,6 +32,7 @@
         "istanbul": "^0.3.17",
         "lodash": "^4.17.11",
         "mocha": "^2.2.5",
+        "union-type": "^0.4.1",
         "url-loader": "^0.5.7",
         "webpack": "^1.12.12"
     },

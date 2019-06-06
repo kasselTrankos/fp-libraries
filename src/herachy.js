@@ -24,6 +24,7 @@ Herachy.prototype.children = function(f) {
   return new Herachy.of(filter);
 
 };
+// styudy how to made more clearer
 const getHerachy = (users = []) => {
   var yt = Herachy.of(users)
     .children(is('high')(prop('type')))

@@ -43,7 +43,7 @@ const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1)  =
     compose(getPages(count), getStart(page)(size), getSize(total))(limit), 
     getPaginationRight(pages)(size)(page)
   );
-}
+};
 
 
 
