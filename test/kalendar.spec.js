@@ -36,4 +36,15 @@ describe('Kalendar spects for test', () => {
     const monthName = moment().format('MMMM');
     expect(getMonthName()).to.be.equal(monthName);
   });
+  it(`When is clicked a lot untill last week of agost`, () => {
+    getNextWeek();
+    getNextWeek();
+    getNextWeek();
+    getNextWeek();
+    const days = getNextWeek();
+
+    days.forEach(({date, isToday})=> {
+      expect(isToday).to.be.false;
+    });
+  });
 });
