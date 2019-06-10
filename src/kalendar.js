@@ -14,20 +14,18 @@ export const getWeek = () => daysWeek();
 export const setToday = () => {
   current = new Date();
 };
-export const setNextWeek = () => {
-  current = new Date(current.setDate(current.getDate()+7));
-};
-export const setPrevWeek = () => {
-  current = new Date(current.setDate(current.getDate()-7));
+const setCurrentDate = offset => {
+  var dateOffset = (24*60*60*1000) * offset; //5 days
+  current.setTime(current.getTime() + dateOffset);
 };
 
 
 export const getNextWeek = () => {
-  setNextWeek();
+  setCurrentDate(7);
   return daysWeek(current);
 };
 export const getPrevWeek = () => {
-  setPrevWeek();
+  setCurrentDate(-7);
   return daysWeek(current);
 };
 
