@@ -17,8 +17,12 @@ export const getWeek = () => daysWeek();
 export const setToday = () => {
   current = new Date();
 };
-export const getNextWeek = () => {
+export const setNextWeek = () => {
   current = new Date(current.setDate(current.getDate()+7));
+};
+
+export const getNextWeek = () => {
+  setNextWeek();
   return daysWeek(current);
 };
 
