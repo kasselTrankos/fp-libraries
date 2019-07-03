@@ -2,7 +2,7 @@ import { setToday, getWeek, getNextWeek, getMonthName, getPrevWeek } from '../sr
 import moment from 'moment';
 const expect = require('chai').expect;
 
-describe('Kalendar spects for test', () => {
+xdescribe('Kalendar spects for test', () => {
   it('When is no current date given obtains current week and start with startOf', () => {
     const startOfWeek = moment().startOf('isoWeek');
     const days = getWeek();

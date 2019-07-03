@@ -1,7 +1,6 @@
 import compose from 'lodash/fp/compose';
 import Center from './center';
-import Right from './right';
-import Left from './left';
+import {Either} from 'ramda-fantasy';
 
 
 const not = value => !value;
