@@ -34,8 +34,8 @@ const gotPaginationLeft = pages => size => page =>
 const gotPaginationRight = pages => size => page =>
   [pages > size, compose(not, isAtEndPostion(pages)(size))(page)].every(Boolean);
 
-const getPaginationLeft = pages => size => page => 
-  gotPaginationLeft(pages)(size)(page) ? [].concat(first(page), previous(page)) : [];
+const getPaginationLeft = pages => size => page => [].concat(first(page));
+  // gotPaginationLeft(pages)(size)(page) ? [].concat(first(page), previous(page)) : [];
 
 const getPaginationRight = pages => size => page => 
   gotPaginationRight(pages)(size)(page) ? [].concat(next(page), last(pages)) : [];

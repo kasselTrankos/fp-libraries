@@ -2,14 +2,14 @@ import { getPagination} from '../src/pagination';
 import jsc from 'jsverify';
 
 const expect = require('chai').expect;
-describe('pagination spects for test', () => {
-  it('got first page', () => {
+describe('PAGINATION', () => {
+  it('expect got first page when is over 1 current page', () => {
     const total = jsc.integer(20, 30).generator();
     const size  = jsc.integer(6, 10).generator();
     const limit  = jsc.integer(11, 18).generator();
 
-    const pagination = getPagination(total)(size)(limit)(1);
-    console.log(pagination);
+    const [first] = getPagination(total)(size)(limit)(2);
+    expect(first.page).to.be.equal(1);
   })
   // it('When form the first obtain a objet for first, previous', () => {
   //   expect(first()).to.eql([{page: 1, text: '«'}]);
