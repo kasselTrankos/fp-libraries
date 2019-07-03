@@ -3,13 +3,7 @@
     "version": "0.0.1",
     "description": "This is a  ",
     "scripts": {
-        "test": "mocha --compilers js:babel/register",
-        "coverage": "istanbul cover _mocha -- --compilers js:babel/register",
-        "coverage-es6": "babel-node ./node_modules/.bin/isparta cover _mocha",
-        "watch": "webpack --watch",
-        "dev": "webpack-dev-server --devtool eval --hot --progress --colors --content-base build",
-        "postinstall": "webpack --config ./webpack-prod.config.js --progress --colors",
-        "start": "node server.js"
+        "test": "mocha --compilers js:babel/register"
     },
     "keywords": [
         "tdd",
@@ -30,6 +24,7 @@
         "html-loader": "^0.4.0",
         "isparta": "^3.0.4",
         "istanbul": "^0.3.17",
+        "jsverify": "^0.8.4",
         "lodash": "^4.17.11",
         "mocha": "^2.2.5",
         "moment": "^2.24.0",

@@ -1,20 +1,30 @@
-import { getPagination, first, previous, last, next} from '../src/pagination';
+import { getPagination} from '../src/pagination';
+import jsc from 'jsverify';
+
 const expect = require('chai').expect;
 describe('pagination spects for test', () => {
-  it('When form the first obtain a objet for first, previous', () => {
-    expect(first()).to.eql([{page: 1, text: '«'}]);
-    expect(previous(2)).to.eql([{page: 1, text: '‹'}]);
-    expect(last(13)).to.eql([{page: 13, text: '»'}]);
-    expect(next(13)).to.eql([{page: 14, text: '›'}]);
-  });
-  it('When size pagination is bigger than pages, then pagination ons only the pages', ()=>{
-    const total = 40;
-    const size = 6;
-    const limit = 20;
-    const page = 1;
-    const pages =  getPagination(total)(size)(limit)(page);
-    expect(pages).to.deep.equal([ {current: 1, text: '1'}, {current: 2, text: '2'} ]);
-  });
+  it('got first page', () => {
+    const total = jsc.integer(20, 30).generator();
+    const size  = jsc.integer(6, 10).generator();
+    const limit  = jsc.integer(11, 18).generator();
+
+    const pagination = getPagination(total)(size)(limit)(1);
+    console.log(pagination);
+  })
+  // it('When form the first obtain a objet for first, previous', () => {
+  //   expect(first()).to.eql([{page: 1, text: '«'}]);
+  //   expect(previous(2)).to.eql([{page: 1, text: '‹'}]);
+  //   expect(last(13)).to.eql([{page: 13, text: '»'}]);
+  //   expect(next(13)).to.eql([{page: 14, text: '›'}]);
+  // });
+  // it('When size pagination is bigger than pages, then pagination ons only the pages', ()=>{
+  //   const total = 40;
+  //   const size = 6;
+  //   const limit = 20;
+  //   const page = 1;
+  //   const pages =  getPagination(total)(size)(limit)(page);
+  //   expect(pages).to.deep.equal([ {current: 1, text: '1'}, {current: 2, text: '2'} ]);
+  // });
   // it('When is at page 2 then show navigation go first and previous', ()=>{
   //   const total = 190;
   //   const size = 6;
