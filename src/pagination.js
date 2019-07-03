@@ -10,9 +10,9 @@ const value = right => right.value;
 console.log(safePage(true).map(x=> {x.page =100; return x;}).map(x=>[x]));
 
 
+const toArray = x =>[x]; 
 const not = value => !value;
 const buildPageObject  = page => ({current: page, text: String(page)});
-const toArray = x =>[x]; 
 const previous = page => () => ({page: --page, text:'‹'});
 const last = pages  => [Right(pages, '»')];
 const next = page => [Right(++page, '›')];
@@ -25,24 +25,25 @@ const getCountPagination = total => size => limit => compose(getMaxPages(size), 
 const getCountPages = total => size => limit => pages => pages < size ? pages : getSize(total)(limit);
 const getStart = page => size => total => 
   [isLessThan(total)(size), isAtEndPostion(total)(size)(page)].every(Boolean) ? total - size + 1 : page;
-const getPages  = size => start =>  Array.from({length: size}, (_, i) =>  buildPageObject(start + i));
+
+const getPages  = size => start => 
+  Array.from({length: size}, (_, i) =>  compose(value, Right, buildPageObject)(start + i));
 
 
-const gotPaginationLeft = pages => size => page => 
-  [pages > size, page > 1].every(Boolean);
 
 const gotPaginationRight = pages => size => page =>
-  [pages > size, compose(not, isAtEndPostion(pages)(size))(page)].every(Boolean);
+[pages > size, compose(not, isAtEndPostion(pages)(size))(page)].every(Boolean);
 
 
 
 const getPaginationLeft = pages => size => page => {
+  const gotPaginationLeft = pages => size => page => 
+    [pages > size, page > 1].every(Boolean);
   const Page = compose(safePage, gotPaginationLeft(pages)(size));
-  const firstPage = compose(value, compose(map(toArray), Page));
+  const firstPage = compose(value, map(toArray), Page);
   const previousPage = compose(value, map(toArray), map(previous(page)), Page);
-  return   [].concat(firstPage(page), previousPage(page));
+  return  [].concat(firstPage(page), previousPage(page));
 }
-  // gotPaginationLeft(pages)(size)(page) ? [].concat(first(page), previous(page)) : [];
 
 const getPaginationRight = pages => size => page => 
   gotPaginationRight(pages)(size)(page) ? [].concat(next(page), last(pages)) : [];

@@ -15,7 +15,9 @@ describe('PAGINATION', () => {
     expect(first.text).to.be.equal('1');
   });
   it('expect second page is previous page', () => {
-    const [first, second] = getPagination(total)(size)(limit)(4);
+    const [first, second, ...rest] = getPagination(total)(size)(limit)(4);
+    console.log(rest, '00000');
+    expect(first.text).to.be.equal('«');
     expect(second.text).to.be.equal('‹');
   });
 
