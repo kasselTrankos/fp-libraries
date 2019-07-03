@@ -3,14 +3,18 @@ import jsc from 'jsverify';
 
 const expect = require('chai').expect;
 describe('PAGINATION', () => {
+  const total = jsc.integer(200, 230).generator();
+  const size  = jsc.integer(2, 4).generator();
+  const limit  = jsc.integer(11, 18).generator();
   it('expect got first page when is over 1 current page', () => {
-    const total = jsc.integer(100, 130).generator();
-    const size  = jsc.integer(2, 4).generator();
-    const limit  = jsc.integer(11, 18).generator();
-
     const [first] = getPagination(total)(size)(limit)(2);
-    expect(first.page).to.be.equal(1);
-  })
+    expect(first.text).to.be.equal('«');
+  });
+  it('expect dont got first page when is over 1 current page', () => {
+    const [first] = getPagination(total)(size)(limit)(1);
+    expect(first.text).to.be.equal('1');
+  });
+
   // it('When form the first obtain a objet for first, previous', () => {
   //   expect(first()).to.eql([{page: 1, text: '«'}]);
   //   expect(previous(2)).to.eql([{page: 1, text: '‹'}]);

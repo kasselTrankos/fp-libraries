@@ -13,7 +13,6 @@ console.log(safePage(true).map(x=> {x.page =100; return x;}).map(x=>[x]));
 const not = value => !value;
 const buildPageObject  = page => ({current: page, text: String(page)});
 const first = x =>[x]; 
-// [new Left(1, '«')];
 const previous = page => [Left(--page, '‹')];
 const last = pages  => [Right(pages, '»')];
 const next = page => [Right(++page, '›')];
