@@ -12,8 +12,8 @@ console.log(safePage(true).map(x=> {x.page =100; return x;}).map(x=>[x]));
 
 const not = value => !value;
 const buildPageObject  = page => ({current: page, text: String(page)});
-const first = x =>[x]; 
-const previous = page => [Left(--page, '‹')];
+const toArray = x =>[x]; 
+const previous = page => () => ({page: --page, text:'‹'});
 const last = pages  => [Right(pages, '»')];
 const next = page => [Right(++page, '›')];
 const getSize = total => limit => Math.ceil(total / limit);
@@ -38,8 +38,9 @@ const gotPaginationRight = pages => size => page =>
 
 const getPaginationLeft = pages => size => page => {
   const Page = compose(safePage, gotPaginationLeft(pages)(size));
-  const firstPage = compose(map(first), Page);
-  return   [].concat(compose(value, firstPage)(page));
+  const firstPage = compose(value, compose(map(toArray), Page));
+  const previousPage = compose(value, map(toArray), map(previous(page)), Page);
+  return   [].concat(firstPage(page), previousPage(page));
 }
   // gotPaginationLeft(pages)(size)(page) ? [].concat(first(page), previous(page)) : [];
 

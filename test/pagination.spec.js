@@ -14,6 +14,10 @@ describe('PAGINATION', () => {
     const [first] = getPagination(total)(size)(limit)(1);
     expect(first.text).to.be.equal('1');
   });
+  it('expect second page is previous page', () => {
+    const [first, second] = getPagination(total)(size)(limit)(4);
+    expect(second.text).to.be.equal('‹');
+  });
 
   // it('When form the first obtain a objet for first, previous', () => {
   //   expect(first()).to.eql([{page: 1, text: '«'}]);
