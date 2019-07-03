@@ -2,6 +2,12 @@ import compose from 'lodash/fp/compose';
 import Center from './center';
 import {Either} from 'ramda-fantasy';
 
+const {Right, Left}  = Either;
+const safePage = cond => cond ? Right({page: 1, text: '«'}) : Left([]);
+
+
+console.log(safePage(true).map(x=> {x.page =100; return x;}).map(x=>[x]));
+
 
 const not = value => !value;
 const buildPageObject  = page => ({current: page, text: String(page)});
