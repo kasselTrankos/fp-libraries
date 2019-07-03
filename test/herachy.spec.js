@@ -1,6 +1,6 @@
 import { getHerachy} from '../src/herachy';
 const expect = require('chai').expect;
-describe('herachy spects for test', () => {
+xdescribe('herachy spects for test', () => {
   let users;
   beforeEach( ()=> {
     users = [

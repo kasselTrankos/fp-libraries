@@ -30,9 +30,11 @@
         "html-loader": "^0.4.0",
         "isparta": "^3.0.4",
         "istanbul": "^0.3.17",
+        "jsverify": "^0.8.4",
         "lodash": "^4.17.11",
         "mocha": "^2.2.5",
         "moment": "^2.24.0",
+        "ramda-fantasy": "^0.8.0",
         "union-type": "^0.4.1",
         "url-loader": "^0.5.7",
         "webpack": "^1.12.12"
