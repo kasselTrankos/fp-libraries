@@ -4,8 +4,8 @@ import jsc from 'jsverify';
 const expect = require('chai').expect;
 describe('PAGINATION', () => {
   it('expect got first page when is over 1 current page', () => {
-    const total = jsc.integer(20, 30).generator();
-    const size  = jsc.integer(6, 10).generator();
+    const total = jsc.integer(100, 130).generator();
+    const size  = jsc.integer(2, 4).generator();
     const limit  = jsc.integer(11, 18).generator();
 
     const [first] = getPagination(total)(size)(limit)(2);

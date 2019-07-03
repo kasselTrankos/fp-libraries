@@ -1,9 +1,10 @@
 import compose from 'lodash/fp/compose';
-import Center from './center';
 import {Either} from 'ramda-fantasy';
 
 const {Right, Left}  = Either;
 const safePage = cond => cond ? Right({page: 1, text: '«'}) : Left([]);
+const map = fn => right => right.map(fn);
+const value = right => right.value;
 
 
 console.log(safePage(true).map(x=> {x.page =100; return x;}).map(x=>[x]));
@@ -11,7 +12,7 @@ console.log(safePage(true).map(x=> {x.page =100; return x;}).map(x=>[x]));
 
 const not = value => !value;
 const buildPageObject  = page => ({current: page, text: String(page)});
-const first = page => safePage(page > 1).map(x =>[x]).value; 
+const first = x =>[x]; 
 // [new Left(1, '«')];
 const previous = page => [Left(--page, '‹')];
 const last = pages  => [Right(pages, '»')];
@@ -34,7 +35,13 @@ const gotPaginationLeft = pages => size => page =>
 const gotPaginationRight = pages => size => page =>
   [pages > size, compose(not, isAtEndPostion(pages)(size))(page)].every(Boolean);
 
-const getPaginationLeft = pages => size => page => [].concat(first(page));
+
+
+const getPaginationLeft = pages => size => page => {
+  const Page = compose(safePage, gotPaginationLeft(pages)(size));
+  const firstPage = compose(map(first), Page);
+  return   [].concat(compose(value, firstPage)(page));
+}
   // gotPaginationLeft(pages)(size)(page) ? [].concat(first(page), previous(page)) : [];
 
 const getPaginationRight = pages => size => page => 
