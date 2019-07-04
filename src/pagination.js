@@ -33,10 +33,7 @@ const lastPage = page => {
   const last = page => () => ({page, text: '»'});
   return compose(value, map(toArray), map(last(page)), safePage);
 }
-const nextPage =  page => {
-  const next = page => () => ({page: ++page, text:'›'});
-  return compose(value, map(toArray), map(next(page)), safePage);
-};
+const nextPage =  page => compose(value, map(toArray), map(x => ({page: ++page, text:'›'})), safePage);
 
 const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1)  =>{
   const count = getCountPagination(total)(size)(limit);
