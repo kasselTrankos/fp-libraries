@@ -36,11 +36,12 @@ const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1)  =
   const overFirst = [page > 1];
   const pagesOverSize = [pages > size]; 
   const atEndPages = [compose(not, isAtEndPostion(pages)(size))(page)];
+  return [].concat(
     compose(getPage(x => ({page: 1, text: '«'})), got)(overFirst),
     compose(getPage(x => ({page: less(page), text:'‹'})), got)([...overFirst, ...pagesOverSize]),
     compose(getPages(count), getStart(page)(size), getSize(total))(limit), 
     compose(getPage(x => ({page: add(page), text:'›'})), got)([...pagesOverSize, ...atEndPages]),
-    compose(lastPage(x => ({page: pages, text:'›'})), got)([...pagesOverSize, ...atEndPages])
+    compose(getPage(x => ({page: pages, text:'»'})), got)([...pagesOverSize, ...atEndPages])
   );
 };
 
