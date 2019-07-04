@@ -19,8 +19,8 @@ const getCountPages = total => size => limit => pages => pages < size ? pages : 
 const getStart = page => size => total => 
   is([lt(size)(total), isAtEndPostion(total)(size)(page)]) ? total - add(size)(1) : page;
 
-const getPages  = size => start => 
-  Array.from({length: size}, (_, i) => compose(getPage(x => buildPageObject(add(start)(i))), is)([true]));
+const getPages = length => current => 
+  Array.from({length}, (_, i) => compose(getPage(x => buildPageObject(add(current)(i))), is)([true]));
 
 const getPage = page => compose(prop('value'), map(toArray), map(page), safePage);
 
