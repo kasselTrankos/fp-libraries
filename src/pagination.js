@@ -5,7 +5,7 @@ const {Right, Left}  = Either;
 
 
 const map = fn => right => right.map(fn);
-const safePage = cond => cond ? Right({page: 1, text: '«'}) : Left([]);
+const safePage = cond => cond ? Right({}) : Left([]);
 
 const buildPageObject  = page => ({current: page, text: String(page)});
 const getSize = total => limit => Math.ceil(total / limit);
@@ -17,11 +17,10 @@ const getCountPagination = total => size => limit =>
   compose(getMaxPages(size), getSize(total))(limit);
 const getCountPages = total => size => limit => pages => pages < size ? pages : getSize(total)(limit);
 const getStart = page => size => total => 
-  is([lt(size)(total), isAtEndPostion(total)(size)(page)]) ? total - size + 1 : page;
+  is([lt(size)(total), isAtEndPostion(total)(size)(page)]) ? total - add(size)(1) : page;
 
 const getPages  = size => start => 
   Array.from({length: size}, (_, i) => compose(getPage(x => buildPageObject(add(start)(i))), is)([true]));
-    // compose(prop('value'), Right, buildPageObject)(start + i));
 
 const getPage = page => compose(prop('value'), map(toArray), map(page), safePage);
 
@@ -40,7 +39,5 @@ const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1)  =
     compose(getPage(x => ({page: pages, text:'»'})), is)([...pagesOverSize, ...atEndPages])
   );
 };
-
-
 
 export {getPagination};
