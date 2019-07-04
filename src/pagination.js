@@ -1,22 +1,22 @@
 import compose from 'lodash/fp/compose';
 import _ from 'lodash';
-import {Either, Maybe} from 'ramda-fantasy';
-const {Right, Left} = Either;
+import {Maybe, Either} from 'ramda-fantasy';
 const {Just, Nothing} = Maybe;
+const {Left, Right} = Either;
 
+const page = Just({page: 1, text: '«'});
+
+const nothing = {value: []}
 
 const lastPage = value => Just({page: value, text:'»'});
-const firstPage = Just({page: 1, text: '«'});
+const firstPage = value => Just({page: 1, text: '«'});
 const nextPage = value => Just({page: ++value, text: '›'});
-const prevPage = value => Just({page: --value, text: '‹'})
-const fromMayBe = optional => maybe => maybe.value ? maybe : optional;
-const getCurrentPage = fromMayBe([]);
-
-console.log(getCurrentPage(Nothing));
-
+const prevPage = value => Just({page: --value, text: '‹'});
+const fromEither = optional => Either.either(Left({page: 1, text: '«'}) ,Right([]))
+console.log(fromEither(false));
 const not = value => !value;
 const buildPageObject  = page => ({current: page, text: String(page)});
-const first = page => [firstPage.value];
+const first = page => [firstPage(page).value];
 const previous = page => [prevPage(page).value];
 const last = pages  => [lastPage(pages).value];
 const next = page => [nextPage(page).value];
