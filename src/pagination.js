@@ -7,9 +7,9 @@ const map = fn => right => right.map(fn);
 const value = right => right.value;
 const add = value => value + 1; 
 const less = value => value - 1; 
-
 const toArray = x =>[x]; 
 const not = value => !value;
+
 const buildPageObject  = page => ({current: page, text: String(page)});
 const getSize = total => limit => Math.ceil(total / limit);
 const isLessThan = max => value => value < max; 
@@ -25,8 +25,6 @@ const getStart = page => size => total =>
 const getPages  = size => start => 
   Array.from({length: size}, (_, i) =>  compose(value, Right, buildPageObject)(start + i));
 
-const lastPage = page =>
-  compose(value, map(toArray), map(x => ({page, text: '»'})), safePage);
 const getPage = page => compose(value, map(toArray), map(page), safePage);
 
 const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1)  =>{
