@@ -1,3 +1,5 @@
+![travis](https://travis-ci.org/kasselTrankos/functional-pagination.svg?branch=master)
+
 # Functional use for lib
 
 Here is the study and test of two necessary flies logic, apply functional rules and libs to made it more robust.
