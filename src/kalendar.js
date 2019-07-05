@@ -1,7 +1,7 @@
-import moment from 'moment';
-import {is, add, compose} from './utils';
-let current = new Date();
-
+import {add, compose} from './utils';
+const months = {
+  es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+}
 const tz = date => {
   const tzDifference = date.getTimezoneOffset();
   return new Date(add(date.getTime())(tzDifference * 60 * 1000 * -1));
@@ -15,7 +15,7 @@ const startWeek = (date = new Date()) => {
 };
 const addDays = days => (date = new Date()) => compose(tz, toMidnight)(new Date(date.setDate(date.getDate() + days)));
 
-const getDaysFrom =  (length = 7) => (date = new Date()) => {
+const getDaysFrom = (length = 7) => (date = new Date()) => {
   const fillDays = (_,index) => ({
     date: compose(addDays(index), startWeek)(date),
     isToday: compose(isToday, compose(addDays(index), startWeek))(date)
@@ -23,18 +23,12 @@ const getDaysFrom =  (length = 7) => (date = new Date()) => {
   return Array.from({length}, fillDays);
 };
 
-
 export const setToday = () => {
   current = new Date();
 };
 
-
-export const getNextWeek = (date = new Date()) => compose(getDaysFrom(7), addDays(7))(date);
-export const getPrevWeek = (current = new Date()) => {
-  setCurrentDate(-7);
-  return daysWeek(current);
-};
-
-export const getWeek = () => getDaysFrom()();
-export const getMonthName =  (actual = new Date()) => moment(actual).format('MMMM');
+export const getWeek = getDaysFrom(7);
+export const getNextWeek = (date = new Date()) => compose(getWeek, addDays(7))(date);
+export const getPrevWeek = (date = new Date()) => compose(getWeek, addDays(-7))(date);
+export const getMonthName =  (date = new Date()) => months.es[date.getMonth()];
 
