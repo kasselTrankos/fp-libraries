@@ -1,5 +1,5 @@
 import {tagged} from 'daggy';
-const Equivalence = tagged('Equivalence', ['f'])
+const Equivalence = tagged('Equivalence', ['f']);
 
 // Add a pre-processor for the variables.
 Equivalence.prototype.contramap =function (g) {
@@ -7,4 +7,6 @@ Equivalence.prototype.contramap =function (g) {
     (x, y) => this.f(g(x), g(y))
   )
 }
+
+
 module.exports = {Equivalence};

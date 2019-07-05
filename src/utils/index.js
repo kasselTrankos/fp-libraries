@@ -1,4 +1,5 @@
-export {Equivalence} from './Equivalence';
+export { Equivalence } from './Equivalence';
+export { ToDate } from './toDate';
 export const compose = (fA, fB) => x => fA(fB(x)); 
 export const prop = prop => obj => obj[prop];
 export const add = valueA => valueB => valueA + valueB; 
