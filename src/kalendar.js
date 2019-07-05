@@ -5,22 +5,25 @@ const tz = date => {
   return new Date(add(date.getTime())(tzDifference * 60 * 1000 * -1));
 };
 const toMidnight = date => new Date(date.setHours(0,0,0,0));
-const isToday = date => Boolean( +tz(date) === +compose(tz, toMidnight)(new Date()));
+const isToday = date => Boolean( +compose(tz, toMidnight)(date) === +compose(tz, toMidnight)(new Date()));
+const startWeek = (date = new Date()) => {
+  const day = date.getDay();
+  const diff = date.getDate() - day + (day == 0 ? -6 : 1);
+  return compose(tz, toMidnight)(new Date(date.setDate(diff)));
+};
+const addDays = days => (date = new Date()) => compose(tz, toMidnight)(new Date(date.setDate(date.getDate() + days)));
 
 let current = new Date();
-const daysWeek = (actual = new Date()) => {
-  const startOfWeek = moment(actual).startOf('isoWeek');
-  console.log('to midnight', compose(tz, toMidnight)(new Date()),' tz', tz(new Date()), new Date(), tz(startOfWeek.toDate()));
-  // console.log(startOfWeek.add(5, 'days'), new Date(startOfWeek));
+const getDaysFrom =  (length = 7) => (actual = new Date()) => {
   const fillDays = (_,index) => ({
-    date: moment(startOfWeek).add(index, 'days'), 
-    isToday: isToday(moment(startOfWeek).add(index, 'days').toDate())
+    date: compose(addDays(index), startWeek)(),
+    isToday: compose(isToday, compose(addDays(index), startWeek))()
   });
 
-  return Array.from({length: 7}, fillDays);
+  return Array.from({length}, fillDays);
 };
 
-export const getWeek = () => daysWeek();
+export const getWeek = () => getDaysFrom()();
 
 export const setToday = () => {
   current = new Date();
