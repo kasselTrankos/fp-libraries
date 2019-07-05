@@ -27,8 +27,7 @@ xdescribe('Kalendar spects for test', () => {
         expect(isToday).to.be.true;
       } else {
         expect(isToday).to.be.false;
-      } 
-
+      }
     });
   });
   it(`When is no current date given obtains current month name ${moment().format('MMMM')}`, () => {

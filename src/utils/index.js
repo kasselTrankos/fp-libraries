@@ -1,3 +1,4 @@
+// export const compose = fA => fB => x => fA(fB(x)); 
 export const prop = prop => obj => obj[prop];
 export const add = valueA => valueB => valueA + valueB; 
 export const less = value => value - 1; 
