@@ -1,4 +1,4 @@
-import { setToday, getWeek, getNextWeek, getMonthName, getPrevWeek } from '../src/kalendar';
+import { getWeek, getNextWeek, getMonthName, getPrevWeek } from '../src/kalendar';
 import moment from 'moment';
 const expect = require('chai').expect;
 
