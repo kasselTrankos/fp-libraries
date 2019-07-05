@@ -1,33 +1,34 @@
-import moment from 'moment';
-let current = new Date();
-const daysWeek = (actual = current) => {
-  const isToday = date => Boolean(date.format('YYYY-MM-DD') === moment().format('YYYY-MM-DD'));
-  const startOfWeek = moment(actual).startOf('isoWeek');
+import {add, compose} from './utils';
+const months = {
+  es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+}
+const tz = date => {
+  const tzDifference = date.getTimezoneOffset();
+  return new Date(add(date.getTime())(tzDifference * 60 * 1000 * -1));
+};
+const toMidnight = date => new Date(date.setHours(0,0,0,0));
+const isToday = date => Boolean( +compose(tz, toMidnight)(date) === +compose(tz, toMidnight)(new Date()));
+const startWeek = (date = new Date()) => {
+  const day = date.getDay();
+  const diff = date.getDate() - day + (day == 0 ? -6 : 1);
+  return compose(tz, toMidnight)(new Date(date.setDate(diff)));
+};
+const addDays = days => (date = new Date()) => compose(tz, toMidnight)(new Date(date.setDate(date.getDate() + days)));
+
+const getDaysFrom = (length = 7) => (date = new Date()) => {
   const fillDays = (_,index) => ({
-    date: moment(startOfWeek).add(index, 'days'), 
-    isToday: isToday(moment(startOfWeek).add(index, 'days'))
+    date: compose(addDays(index), startWeek)(date),
+    isToday: compose(isToday, compose(addDays(index), startWeek))(date)
   });
-  return Array.from({length: 7}, fillDays);
+  return Array.from({length}, fillDays);
 };
 
-export const getWeek = () => daysWeek();
 export const setToday = () => {
   current = new Date();
 };
-const setCurrentDate = offset => {
-  var dateOffset = (24*60*60*1000) * offset; //5 days
-  current.setTime(current.getTime() + dateOffset);
-};
 
-
-export const getNextWeek = () => {
-  setCurrentDate(7);
-  return daysWeek(current);
-};
-export const getPrevWeek = () => {
-  setCurrentDate(-7);
-  return daysWeek(current);
-};
-
-export const getMonthName =  (actual = current) => moment(actual).format('MMMM');
+export const getWeek = getDaysFrom(7);
+export const getNextWeek = (date = new Date()) => compose(getWeek, addDays(7))(date);
+export const getPrevWeek = (date = new Date()) => compose(getWeek, addDays(-7))(date);
+export const getMonthName =  (date = new Date()) => months.es[date.getMonth()];
 
