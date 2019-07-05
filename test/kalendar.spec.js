@@ -8,11 +8,11 @@ describe('Kalendar spects for test', () => {
     const [monday] = getWeek();
     expect(moment(monday.date).format('DD')).to.be.equal(startOfWeek.format('DD'));
   });
-  // it('When is clicked once nextWeek() get next week from actual', () => {
-  //   const startOfWeek = moment().add(7, 'days').startOf('isoWeek');
-  //   const days = getNextWeek();
-  //   expect(days[0].date.format('DD')).to.be.equal(startOfWeek.format('DD'));
-  // });
+  it('When is clicked once nextWeek() get next week from actual', () => {
+    const startOfWeek = moment().add(7, 'days').startOf('isoWeek');
+    const [monday] = getNextWeek();
+    expect(moment(monday.date).format('DD')).to.be.equal(startOfWeek.format('DD'));
+  });
   // it('When is clicked once prevWeek() get previous week from actual', () => {
   //   const startOfWeek = moment().subtract(7, 'days').startOf('isoWeek');
   //   setToday();
