@@ -2,10 +2,7 @@ import {add, compose} from './utils';
 const months = {
   es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 }
-const tz = date => {
-  const tzDifference = date.getTimezoneOffset();
-  return new Date(add(date.getTime())(tzDifference * 60 * 1000 * -1));
-};
+const tz = date => new Date(add(date.getTime())(date.getTimezoneOffset() * 60 * 1000 * -1));
 const toMidnight = date => new Date(date.setHours(0,0,0,0));
 const isToday = date => Boolean( +compose(tz, toMidnight)(date) === +compose(tz, toMidnight)(new Date()));
 const startWeek = (date = new Date()) => {
