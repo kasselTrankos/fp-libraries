@@ -1,4 +1,5 @@
-import { getWeek, getNextWeek, isBeforeNow, getPrevWeek } from '../src/kalendar';
+import { getWeek, getNextWeek, isBeforeNow, getPrevWeek,
+  diffDays } from '../src/kalendar';
 import moment from 'moment';
 const expect = require('chai').expect;
 
@@ -47,7 +48,16 @@ describe('KALENDAR', () => {
       hour: 12, minute: 12};
     expect(isBeforeNow(lower)).to.be.true;
     expect(isBeforeNow(higher)).to.be.false;
+  });
+  it('diff days', () => {
+    let lower = moment().add(-12, 'days').toDate();
+    expect(diffDays(lower)(new Date())).to.be.equal(12);
+    lower = moment().add(-1212, 'days').toDate();
+    expect(diffDays(lower)(new Date())).to.be.equal(1212);
+    lower = moment().add(-30023, 'days').toDate();
+    expect(diffDays(lower)(new Date())).to.be.equal(30023);
 
   });
+
 
 });

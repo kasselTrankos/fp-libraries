@@ -1,4 +1,4 @@
-import {not, lt, add, compose, Equivalence, ToDate} from './utils';
+import {substract, lt, add, compose, Equivalence, ToDate} from './utils';
 
 const months = {
   es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
@@ -28,6 +28,7 @@ const getFullDate = date => {
   const [year, month, day] = date.day.split('-');
   return new Date(year, month - 1, day, date.hour, date.minute, 0);
 }
+const getDays = date => Math.abs(Math.round(date / (1000 *60*60*24)));  
 
 const cast = date => +new Date(date);
 
@@ -37,4 +38,6 @@ export const isBeforeNow  = date => isLower.contramap(cast).contramap(tz)
 export const getNextWeek = (date = new Date()) => compose(getWeek, addDays(7))(date);
 export const getPrevWeek = (date = new Date()) => compose(getWeek, addDays(-7))(date);
 export const getMonthName =  (date = new Date()) => months.es[date.getMonth()];
+export const diffDays = dateA => dateB => compose(getDays, compose(substract(cast(dateB)), cast))(dateA);
 
+//compose(getDays, compose(less(cast(dateB)), cast))(dateA);
