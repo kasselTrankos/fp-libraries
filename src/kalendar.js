@@ -29,7 +29,7 @@ const getFullDate = date => {
   return new Date(year, month - 1, day, date.hour, date.minute, 0);
 }
 
-const cast = date => {console.log(date);return +new Date(date)};
+const cast = date => +new Date(date);
 
 export const getWeek = getDaysFrom(7);
 export const isBeforeNow  = date => isLower.contramap(cast).contramap(tz)
