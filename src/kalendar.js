@@ -9,15 +9,12 @@ const toMidnight = ToDate(x=> new Date(x)).contramap(tz).contramap(setMidNight);
 const isSame = Equivalence((x, y) => x === y);
 const isLower = Equivalence((x, y) =>  lt(x)(y));
 
-const startWeek = (date = new Date()) => {
-  const day = date.getDay();
-  const diff = date.getDate() - day + (day == 0 ? -6 : 1);
-  console.log(getDateFromDay(date)(day + (day == 0 ? -6 : 1)));
-  return toMidnight.f(new Date(date.setDate(diff)));
-};
-const getDateFromDay = (date = new Date) => diff => {
-  return new Date(date.setDate(date.getDate() - diff));
-}
+const startWeek = (date = new Date()) => 
+  toMidnight.f(compose(getDateFromDay(date), getStartWeek)(date));
+
+const getStartWeek = date => date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1);
+
+const getDateFromDay = (date = new Date) => diff => new Date(date.setDate(diff));
 const addDays = days => (date = new Date()) => toMidnight.f(new Date(date.setDate(date.getDate() + days)));
 
 const fillDays = (current = new Date()) => (_,index) => {
