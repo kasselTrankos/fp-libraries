@@ -6,12 +6,23 @@ const expect = require('chai').expect;
 describe('KALENDAR', () => {
   it('When is no current date given obtains current week and start with startOf', () => {
     const startOfWeek = moment().startOf('isoWeek');
-    const [monday] = getWeek();
+    const start = moment().add(-1, 'days').startOf('isoWeek');
+    const week = getWeek();
+    const [monday] = week;
+    week.forEach(({date}, i) => {
+      expect(moment(date).format('DD')).to.be.equal(start.add(i, 'days').format('DD'));
+    });
     expect(moment(monday.date).format('DD')).to.be.equal(startOfWeek.format('DD'));
   });
   it('When is clicked once nextWeek() get next week from actual', () => {
     const startOfWeek = moment().add(7, 'days').startOf('isoWeek');
-    const [monday] = getNextWeek();
+    const start = moment().add(6, 'days').startOf('isoWeek');
+    const week = getNextWeek();
+    const [monday] = week;
+    week.forEach(({date}, i) => {
+      expect(moment(date).format('DD')).to.be.equal(start.add(i, 'days').format('DD'));
+    });
+
     expect(moment(monday.date).format('DD')).to.be.equal(startOfWeek.format('DD'));
   });
   it('When is clicked prevWeek() get previous week from actual', () => {

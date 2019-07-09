@@ -5,17 +5,17 @@ const months = {
 }
 const cast = date => +new Date(date);
 const tz = date => new Date(add(date.getTime())(date.getTimezoneOffset() * 60 * 1000 * -1));
-const setMidNight = date => new Date(date.setHours(0,0,0,0));
+const midnight = date => new Date(date.setHours(0,0,0,0));
 
-const toMidnight = ToDate(x=> new Date(x)).contramap(tz).contramap(setMidNight);
-const isSame = Equivalence((x, y) => x === y).contramap(cast).contramap(toMidnight.f);
+const Midnight = ToDate(x=> new Date(x)).contramap(tz).contramap(midnight);
+const isSame = Equivalence((x, y) => x === y).contramap(cast).contramap(Midnight.f);
 const isLower = Equivalence((x, y) =>  lt(x)(y));
 
 
 const addDays = days => (date = new Date()) => 
-  toMidnight.f(new Date(date.setDate(date.getDate() + days)));
+  Midnight.f(new Date(date.setDate(date.getDate() + days)));
 const startWeek = (date = new Date()) => 
-  toMidnight.f(compose(getDateFromDay(date), getStartWeek)(date));
+  Midnight.f(compose(getDateFromDay(date), getStartWeek)(date));
 
 const getStartWeek = date => date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1);
 
