@@ -56,7 +56,6 @@ describe('KALENDAR', () => {
     expect(diffDays(lower)(new Date())).to.be.equal(1212);
     lower = moment().add(-30023, 'days').toDate();
     expect(diffDays(lower)(new Date())).to.be.equal(30023);
-
   });
 
 
