@@ -1,17 +1,28 @@
 import { getWeek, getNextWeek, isBeforeNow, getPrevWeek,
-  diffDays } from '../src/kalendar';
+  getDaysBetween } from '../src/kalendar';
 import moment from 'moment';
 const expect = require('chai').expect;
 
 describe('KALENDAR', () => {
   it('When is no current date given obtains current week and start with startOf', () => {
     const startOfWeek = moment().startOf('isoWeek');
-    const [monday] = getWeek();
+    const start = moment().startOf('isoWeek').add(-1, 'days');
+    const week = getWeek();
+    const [monday] = week;
+    week.forEach(({date}) => {
+      expect(moment(date).format('DD')).to.be.equal(start.add(1, 'days').format('DD'));
+    });
     expect(moment(monday.date).format('DD')).to.be.equal(startOfWeek.format('DD'));
   });
   it('When is clicked once nextWeek() get next week from actual', () => {
     const startOfWeek = moment().add(7, 'days').startOf('isoWeek');
-    const [monday] = getNextWeek();
+    const start = moment().add(7, 'days').startOf('isoWeek').add(-1, 'days');
+    const week = getNextWeek();
+    const [monday] = week;
+    week.forEach(({date}) => {
+      expect(moment(date).format('DD')).to.be.equal(start.add(1, 'days').format('DD'));
+    });
+
     expect(moment(monday.date).format('DD')).to.be.equal(startOfWeek.format('DD'));
   });
   it('When is clicked prevWeek() get previous week from actual', () => {
@@ -49,14 +60,10 @@ describe('KALENDAR', () => {
     expect(isBeforeNow(lower)).to.be.true;
     expect(isBeforeNow(higher)).to.be.false;
   });
-  it('diff days', () => {
+  it('getDaysBetween', () => {
     let lower = moment().add(-12, 'days').toDate();
-    expect(diffDays(lower)(new Date())).to.be.equal(12);
-    lower = moment().add(-1212, 'days').toDate();
-    expect(diffDays(lower)(new Date())).to.be.equal(1212);
-    lower = moment().add(-30023, 'days').toDate();
-    expect(diffDays(lower)(new Date())).to.be.equal(30023);
-
+    const days = getDaysBetween(lower)(new Date());
+    expect(days.length).to.be.equal(12);
   });
 
 
