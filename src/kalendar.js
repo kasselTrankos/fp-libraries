@@ -2,7 +2,8 @@ import {substract, lt, add, compose, Equivalence, ToDate} from './utils';
 
 const months = {
   es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
-}
+};
+
 const tz = date => new Date(add(date.getTime())(date.getTimezoneOffset() * 60 * 1000 * -1));
 const setMidNight = date => new Date(date.setHours(0,0,0,0));
 const toMidnight = ToDate(x=> new Date(x)).contramap(tz).contramap(setMidNight);
