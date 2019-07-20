@@ -1,5 +1,5 @@
 import { getWeek, getNextWeek, isBeforeNow, getPrevWeek,
-  getDaysBetween } from '../src/kalendar';
+  getDaysBetween } from './../utils/kalendar';
 import moment from 'moment';
 const expect = require('chai').expect;
 

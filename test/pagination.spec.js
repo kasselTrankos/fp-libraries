@@ -6,6 +6,7 @@ describe('PAGINATION', () => {
   const total = jsc.integer(1200, 2230).generator();
   const size  = jsc.integer(2, 4).generator();
   const limit  = jsc.integer(11, 18).generator();
+  
   it('expect got first page when is current page is 2', () => {
     const [first] = getPagination(total)(size)(limit)(4);
     expect(first.text).to.be.equal('«');
