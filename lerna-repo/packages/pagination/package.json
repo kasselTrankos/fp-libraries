@@ -27,5 +27,8 @@
     "devDependencies": {
         "chai": "^3.5.0"
     },
-    "gitHead": "431881dc8cbaec9c1efa6edbf1c04c7a9cd10544"
+    "publishConfig": {
+        "access": "public"
+    },
+    "gitHead": "ed248383edda7429ad495c5fb09d3fb49846362a"
 }
