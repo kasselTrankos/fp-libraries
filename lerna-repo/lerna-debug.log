@@ -1,0 +1,8 @@
+30 error Error: Command failed: git commit -F /tmp/f4622205-923b-43fc-aad6-cafab195c802/lerna-commit.txt
+30 error En la rama master
+30 error Tu rama está actualizada con 'origin/master'.
+30 error
+30 error nada para hacer commit, el árbol de trabajo esta limpio
+30 error
+30 error     at makeError (/home/vera/.npm/_npx/16224/lib/node_modules/lerna/node_modules/execa/index.js:174:9)
+30 error     at Promise.all.then.arr (/home/vera/.npm/_npx/16224/lib/node_modules/lerna/node_modules/execa/index.js:278:16)

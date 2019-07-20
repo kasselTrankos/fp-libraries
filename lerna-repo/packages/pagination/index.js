@@ -26,7 +26,6 @@ const getPage = page => compose(prop('value'), compose(map(toArray), compose(map
 const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1)  =>{
   const count = getCountPagination(total)(size)(limit);
   const pages = getCountPages(total)(size)(limit)(count);
-  /// here start the tree decissor
   const overFirst = [lt(1)(page)];
   const pagesOverSize = [lt(size)(pages)]; 
   const atEndPages = [compose(not, isAtEndPostion(pages)(size))(page)];
