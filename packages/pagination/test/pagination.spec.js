@@ -1,4 +1,4 @@
-import { getPagination} from '../src/pagination';
+import { getPagination} from '../index';
 import jsc from 'jsverify';
 
 const expect = require('chai').expect;
