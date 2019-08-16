@@ -21,7 +21,7 @@ const getStart = page => size => total =>
 const getPages = length => current => 
   Array.from({length}, (_, i) => compose(getPage(x => buildPageObject(add(current)(i))), is)([true]));
 
-const getPage = page => compose(prop('value'), compose(map(toArray), compose(map(page), safePage)));
+const getPage = page => compose(prop('value'), map(toArray), map(page), safePage);
 
 const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1)  =>{
   const count = getCountPagination(total)(size)(limit);

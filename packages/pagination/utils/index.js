@@ -1,4 +1,4 @@
-export const compose = (fA, fB) => x => fA(fB(x)); 
+export const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x); 
 export const add = valueA => valueB => valueA + valueB; 
 export const less = value => value - 1; 
 export const not = value => !value;
