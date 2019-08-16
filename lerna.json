@@ -2,5 +2,10 @@
   "packages": [
     "packages/*"
   ],
+  "command": {
+    "publish": {
+      "npmClient": "npm"
+    }
+  },
   "version": "independent"
 }
