@@ -1,0 +1,14 @@
+{
+  "packages": [
+    "packages/*"
+  ],
+  "command": {
+    "publish": {
+      "npmClient": "npm"
+    }
+  },
+  "publicConfig": {
+    "access": "public"
+  },
+  "version": "independent"
+}
