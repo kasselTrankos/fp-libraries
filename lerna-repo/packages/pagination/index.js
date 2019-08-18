@@ -14,7 +14,9 @@ const getBegin = size => total => total - size;
 const getMaxPages = size => pages => lt(pages)(size) ? pages : size; 
 const getCountPagination = total => size => limit => 
   compose(getMaxPages(size), getSize(total))(limit);
-const getCountPages = total => size => limit => pages => pages < size ? pages : getSize(total)(limit);
+const getCountPages = total => size => limit => pages => pages < size 
+  ? pages 
+  : getSize(total)(limit);
 const getStart = page => size => total => 
   is([lt(size)(total), isAtEndPostion(total)(size)(page)]) ? total - add(size)(1) : page;
 
