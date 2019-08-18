@@ -1,6 +1,6 @@
 {
     "name": "@functional-lib/pagination",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "This is the pagination functional library ",
     "scripts": {
         "test": "mocha --compilers js:babel/register"
