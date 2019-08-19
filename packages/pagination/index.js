@@ -33,11 +33,13 @@ const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1) =>
   const pages = fromEither(count)(getRighOrLeft(pages < size)(getSize(total)(limit)));
   const _pages = Pages.List(_getPages(count));
 
-  const tt = _pages.map(({page, text}) => ({
-    page: compose(getStart(page)(size), getSize(total))(limit) + 111, 
-    text: 2
-  }));
-  console.log(tt);
+  const {Page} = _pages.map((elm, index) => {
+    const curpage = compose(getStart(page)(size), getSize(total))(limit) + index;
+    return {
+      page: curpage,
+      text: String(curpage),
+    };
+  });
   const overFirst = [lt(1)(page)];
   const pagesOverSize = [lt(size)(pages)]; 
   const atEndPages = [compose(not, isAtEndPostion(pages)(size))(page)];
@@ -45,7 +47,7 @@ const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1) =>
   return [].concat(
     compose(getPage(x => ({page: 1, text: '«'})), is)(overFirst),
     compose(getPage(x => ({page: less(page), text:'‹'})), is)([...overFirst, ...pagesOverSize]),
-    compose(getPages(count), getStart(page)(size), getSize(total))(limit), 
+    Page, 
     compose(getPage(x => ({page: add(page)(1), text:'›'})), is)([...pagesOverSize, ...atEndPages]),
     compose(getPage(x => ({page: pages, text:'»'})), is)([...pagesOverSize, ...atEndPages])
   );
