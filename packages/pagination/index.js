@@ -1,5 +1,6 @@
 import {Either} from 'ramda-fantasy';
 import {fromEither} from 'sanctuary';
+import {Pages, Page} from './utils/page';
 
 import {lt, add, less, not, toArray, is, prop, compose, getRighOrLeft} from './utils';
 const {Right, Left}  = Either;
@@ -22,14 +23,25 @@ const getStart = page => size => total =>
 const getPages = length => current => 
   Array.from({length}, (_, i) => compose(getPage(x => buildPageObject(add(current)(i))), is)([true]));
 
+const _getPages = length => Array.from({length}, (_, i) => Page(i, 0));
+
 const getPage = page => compose(prop('value'), map(toArray), map(page), safePage);
+
 
 const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1) => {
   const count = getCountPagination(total)(size)(limit);
-  const pages = fromEither(count)(getRighOrLeft(pages < size)(getSize(total)(limit)))
+  const pages = fromEither(count)(getRighOrLeft(pages < size)(getSize(total)(limit)));
+  const _pages = Pages.List(_getPages(count));
+
+  const tt = _pages.map(({page, text}) => ({
+    page: compose(getStart(page)(size), getSize(total))(limit) + 111, 
+    text: 2
+  }));
+  console.log(tt);
   const overFirst = [lt(1)(page)];
   const pagesOverSize = [lt(size)(pages)]; 
   const atEndPages = [compose(not, isAtEndPostion(pages)(size))(page)];
+  
   return [].concat(
     compose(getPage(x => ({page: 1, text: '«'})), is)(overFirst),
     compose(getPage(x => ({page: less(page), text:'‹'})), is)([...overFirst, ...pagesOverSize]),
