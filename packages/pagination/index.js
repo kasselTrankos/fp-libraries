@@ -19,6 +19,7 @@ const getCountPagination = total => size => limit =>
 const getStart = page => size => total => 
   is([lt(size)(total), isAtEndPostion(total)(size)(page)]) ? total - add(size)(1) : page;
 
+// get pages of component
 const getPages = length => current => 
   Array.from({length}, (_, i) => compose(getPage(x => buildPageObject(add(current)(i))), is)([true]));
 
