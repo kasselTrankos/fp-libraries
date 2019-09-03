@@ -13,6 +13,14 @@ const getSize = total => limit => Math.ceil(total / limit);
 const _getPages = length => current =>
   Array.from({length}, (_, i) => Page(current - i, String(current - i))).reverse();
 
+<<<<<<< HEAD
+=======
+// get pages of component given necessary values
+const getPages = length => current => 
+  Array.from({length}, (_, i) => compose(getPage(x => buildPageObject(add(current)(i))), is)([true]));
+
+const getPage = page => compose(prop('value'), map(toArray), map(page), safePage);
+>>>>>>> 6d6bc47eb8df9d3acff881d52e8dfb659158c6f3
 
 const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1) => {
   const end = compose(min(page + size), getSize(total))(limit);
