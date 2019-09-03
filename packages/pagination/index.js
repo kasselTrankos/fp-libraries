@@ -2,12 +2,7 @@ import {fromEither} from 'sanctuary';
 import {Page} from './utils/page';
 import {lt, add, less, compose, getRighOrLeft} from './utils';
 
-const Any = page => ({
-  page,
-  concat: a => Any(page || a.page),
-});
 
-Any.empty = () => Any([]);
 const min = max => value => Math.min(max, value);
 const getSize = total => limit => Math.ceil(total / limit);
 const getPages = length => current =>
