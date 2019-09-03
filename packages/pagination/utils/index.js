@@ -2,7 +2,7 @@ import { Left, Right } from "sanctuary";
 
 export const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x); 
 export const add = valueA => valueB => valueA + valueB; 
-export const less = value => value - 1; 
+export const less = a => b => a - b; 
 export const not = value => !value;
 export const toArray = x =>[x]; 
 export const is = cond => cond.every(Boolean);
