@@ -3,10 +3,10 @@ import jsc from 'jsverify';
 
 const expect = require('chai').expect;
 describe('PAGINATION', () => {
-  const total = jsc.integer(1200, 2230).generator();
+  const total = jsc.integer(80, 100).generator();
   const size  = jsc.integer(2, 4).generator();
   const limit  = jsc.integer(11, 18).generator();
-  it('expect got first page when is current page is 2', () => {
+  it('expect got first page when is current page is 4', () => {
     const [first] = getPagination(total)(size)(limit)(4);
     expect(first.text).to.be.equal('«');
   });

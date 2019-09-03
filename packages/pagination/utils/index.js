@@ -9,4 +9,4 @@ export const is = cond => cond.every(Boolean);
 export const prop = prop => obj => obj[prop];
 export const substract = valueA => valueB => valueA - valueB; 
 export const lt = valueA => valueB => valueA < valueB;
-export const getRighOrLeft = cond => cond ? Left : Right;
+export const getRighOrLeft = cond => cond ? Right : Left;
