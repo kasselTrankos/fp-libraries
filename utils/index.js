@@ -1,4 +1,4 @@
-export const compose = (...args) => x => args.reduce(f => f(x), x); 
+export const compose = (...fncs) => x => fncs.reduce((acc, f) => f(acc), x); 
 export const prop = prop => obj => obj[prop];
 export const add = valueA => valueB => valueA + valueB; 
 export const less = value => value - 1; 
