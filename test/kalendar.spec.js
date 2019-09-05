@@ -1,13 +1,13 @@
 import {addDays} from './../kalendar';
 import moment from 'moment';
 import {expect} from 'chai';
+import jsc from 'jsverify';
 
 describe('KALENDAR', () => {
-  it('works concat', () => {
-    const tomorrow = addDays(10);
-  
-    console.log(tomorrow.value, new Date());
-    // const week = getWeek();
-    // console.log(new Date().getTimezoneOffset());
+  it('Add XX Dayss is working fine', () => {
+    const add = jsc.nat(365).generator();
+    const tomorrow = addDays()(add);
+    const expected  = moment().add(add, 'days').format('DD/MM/YYYY');
+    expect(tomorrow.format()).to.equal(expected);
   });
 });
