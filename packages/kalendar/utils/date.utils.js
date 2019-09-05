@@ -1,6 +1,6 @@
 import {add, compose} from './index';
 
-const timezone = (date = new Date()) => date.getTimezoneOffset() * 60 * 1000 * -1;
+export const timezone = (date = new Date()) => new Date(date.getTimezoneOffset() * 60 * 1000 * -1);
 
 export const midnight = date => new Date(date.setHours(0,0,0,0));
 export const cast = date => +new Date(date);
