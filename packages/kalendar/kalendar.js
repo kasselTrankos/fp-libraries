@@ -1,4 +1,5 @@
 import {tagged} from 'daggy';
+import {add, tz, monday} from './utils/date';
 // import {substract, lt, compose} from './utils';
 // import {cast, clone, midnight, moveToDate, toDay,
 //   getDate, plusDays, timezone} from './utils/date.utils';
@@ -11,26 +12,14 @@ import {tagged} from 'daggy';
 //   es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 // }
 
-const daysToMilliseconds = days => days * 60 * 60 * 24 * 1000;
+
 const midnight = date => new Date(date.setHours(0,0,0,0));
 
-const date = tagged('date', ['f']);
-date.prototype.contramap =function (g) {
-  return date(x => this.f(g(x)));
-};
 
 
-//TODO: need to made the IO interfaz pattern
-const dateIO = value => new Date(new Date(0).setTime(value));
-const add = date(dateIO).contramap(daysToMilliseconds);
-const tz = date(dateIO).contramap(() => new Date().getTimezoneOffset()* 60 * 1000 * -1);
-// const add = days => days * 60 * 60 * 24 * 1000;
 
-const getMonday = date(dateIO)
-  .contramap(date =>{
-    const d =  (date.getDay() -  (date.getDay() === 0 ? 0 : 1)) * -1;
-    return daysToMilliseconds(d);
-  });
+
+
 const kalendar = tagged('kalendar', ['value']);
 
 kalendar.prototype.concat = function(that) {
@@ -89,11 +78,6 @@ kalendar.prototype.map = function(f) {
       //   const days = compose(addFrom, diffDays(dateA))(dateB);
       //   return days(dateA);
       // }
-const firstDay = date => {
-  const d = date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1);
-  console.log(d, date, date.getDate(), date.getDay());
-  return d;
-};
       
       
       
@@ -115,9 +99,9 @@ export const addDays =  (date = new Date())  => days => kalendar(date)
   .concat(add.f(days))
   // .concat(tz.f());
 
-export const getWeek = (date = new Date()) => kalendar(date)
+export const getMonday = (date = new Date()) => kalendar(date)
   .map(midnight)
-  .concat(getMonday.f(date));
+  .concat(monday.f(date));
           // console.log(tz(new Date()), 'f00sdf0sdf0fds')
           // addDays(date)(firstDay(date));
           
