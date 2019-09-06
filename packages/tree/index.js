@@ -23,6 +23,7 @@ function Branch(left, right, ann) {
   };
 }
 
+
 // Any : Bool -> Any
 function Any(bool) {
   return {
