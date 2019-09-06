@@ -11,7 +11,16 @@ import {tagged} from 'daggy';
 //   es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 // }
 
+const date = tagged('date', ['f']);
+date.prototype.contramap =function (g) {
+  return date(x => this.f(g(x)));
+};
 
+const getDays = date(x=> ({getTime: () => x}))
+  .contramap(days => days * 60 * 60 * 24 * 1000);
+
+const getTZ = date(x=> ({getTime: () => x}))
+  .contramap(date => date.getTimezoneOffset() * 60 * 1000 * -1);
 
 // const Midnight = ToDate(x=> new Date(x))
 //   .contramap(tz).contramap(midnight).contramap(clone);
@@ -50,7 +59,7 @@ import {tagged} from 'daggy';
       //   return days(dateA);
       // }
 const firstDay = date => {
-  const d = date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1)
+  const d = date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1);
   console.log(d, date, date.getDate(), date.getDay());
   return d;
 };
@@ -84,10 +93,11 @@ kalendar.prototype.map = function(f) {
 // };
 // const tz = date => kalendar(date).concat({getTime: () => date.getTimezoneOffset() * 60 * 1000 * -1})
 // console.log(timezone(new Date()), '.......');
-export const addDays =  (date = new Date())  => days => kalendar(date)
-  .concat({getTime: () => days * 60 * 60 * 24 * 1000})
-  .concat({getTime: () => new Date().getTimezoneOffset() * 60 * 1000 * -1});
 
+// console.log(getDate.f(1100));
+export const addDays =  (date = new Date())  => days => kalendar(date)
+  .concat(getDays.f(days))
+  .concat(getTZ.f(date));
 export const getWeek = (date = new Date()) => addDays(date)(firstDay(date));
 
 // export const lessDays =  (date = new Date())  => days => kalendar(date)
