@@ -12,15 +12,23 @@ import {tagged} from 'daggy';
 // }
 
 const date = tagged('date', ['f']);
+const midnight = date => new Date(date.setHours(0,0,0,0));
 date.prototype.contramap =function (g) {
   return date(x => this.f(g(x)));
 };
+//TODO: need to made the IO interfaz pattern
+const dateIO = value => new Date(new Date(0).setTime(value));
+const getDays = date(dateIO).contramap(days => days * 60 * 60 * 24 * 1000);
+const getTZ = date(dateIO).contramap(() => new Date().getTimezoneOffset()* 60 * 1000 * -1);
+// const getDays = days => days * 60 * 60 * 24 * 1000;
 
-const getDays = date(x=> ({getTime: () => x}))
-  .contramap(days => days * 60 * 60 * 24 * 1000);
-
-const getTZ = date(x=> ({getTime: () => x}))
-  .contramap(date => date.getTimezoneOffset() * 60 * 1000 * -1);
+const getMonday = date(x=> ({getTime: () => x}))
+  .contramap(date => {
+    const day = date.getDay(),
+    diff = date.getDate() - day + (day == 0 ? -6:1);
+    console.log('given', date, diff, 'new', new Date(new Date(date.getTime()).setDate(diff)));
+    return new Date(new Date(date.getTime()).setDate(diff));
+  });
 
 // const Midnight = ToDate(x=> new Date(x))
 //   .contramap(tz).contramap(midnight).contramap(clone);
@@ -66,20 +74,23 @@ const firstDay = date => {
 const kalendar = tagged('kalendar', ['value']);
 kalendar.prototype.concat = function(that) {
   return kalendar(new Date(this.value.getTime() + that.getTime()));
-}
+};
 kalendar.empty = function() {
   return new Date(0);
-}
+};
 kalendar.prototype.equals = function(that) {
+  
   return this.value.getTime() === that.getTime();
-}
+};
 kalendar.prototype.format = function(format) {
   const zero = value => value < 10 ? `0${value}`: value;
-  return `${zero(this.value.getDate())}/${zero(this.value.getMonth() + 1)}/${this.value.getFullYear()}`;
-}
+  const dayMonthYear = `${zero(this.value.getDate())}/${zero(this.value.getMonth() + 1)}/${this.value.getFullYear()}`;
+  const hourMinuteSecond = `${zero(this.value.getUTCHours())}:${zero(this.value.getMinutes())}:${zero(this.value.getSeconds())}`;
+  return `${dayMonthYear} ${hourMinuteSecond}`;
+};
 kalendar.prototype.map = function(f) {
   return new Date(f(this.value));
-} 
+};
 
 
 
@@ -97,8 +108,11 @@ kalendar.prototype.map = function(f) {
 // console.log(getDate.f(1100));
 export const addDays =  (date = new Date())  => days => kalendar(date)
   .concat(getDays.f(days))
-  .concat(getTZ.f(date));
-export const getWeek = (date = new Date()) => addDays(date)(firstDay(date));
+  .concat(getTZ.f());
+// export const getWeek = (date = new Date()) => kalendar(getMonday.f(date))
+//   .map(getTZ);
+// console.log(getTZ(new Date()), 'f00sdf0sdf0fds')
+// addDays(date)(firstDay(date));
 
 // export const lessDays =  (date = new Date())  => days => kalendar(date)
 //   .concat({getTime: () => days * 60 * 60 * 24 * 1000 * -1})
