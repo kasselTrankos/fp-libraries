@@ -78,7 +78,7 @@ const midnight = date => new Date(date.setHours(0,0,0,0));
 console.log(midnight);
 export const isBefore = (date = new Date()) => toCompare => 
   kalendar(date).lte(toCompare);
-export const addDays =  (date = new Date())  => days => kalendar(date)
+export const addDays =  (date)  => days => kalendar(date)
   // .concat(tz.f(date))
   .concat(add.f(days))
 export const getMonday = (date = new Date()) => kalendar(date)
