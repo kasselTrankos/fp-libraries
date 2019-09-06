@@ -1,4 +1,4 @@
-import {addDays, getWeek} from './../kalendar';
+import {addDays, getMonday} from './../kalendar';
 import moment from 'moment';
 import {expect} from 'chai';
 import jsc from 'jsverify';
@@ -21,8 +21,8 @@ describe('KALENDAR', () => {
     const error = `origin: ${d} add ${days}: expected(${expected.toDate()}) but the result is ${result.value}`;
     expect(result.equals(expected.toDate()), error).to.be.true;
   });
-  it('get week, ', () => {
-    const result = getWeek(d);
+  it('get monday of current date', () => {
+    const result = getMonday(d);
     const expected = moment(d).startOf('week').add(1, 'days');
     // console.log(week.format(), expected, d);
     const error = `origin: ${d} then expected(${expected.toDate()}) but the result is ${result.value}`;
