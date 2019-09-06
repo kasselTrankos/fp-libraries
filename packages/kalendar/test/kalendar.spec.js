@@ -1,5 +1,5 @@
 import {addDays, getMonday} from './../kalendar';
-import moment from 'moment';
+import { addDays as  add, isMonday } from 'date-fns';
 import {expect} from 'chai';
 import jsc from 'jsverify';
 
@@ -13,19 +13,18 @@ describe('KALENDAR', () => {
 
   });
   it(`expect given any date then add days`, () => {
-    // d = new Date(2019, 7, 19, 0, 38, 31);
+
     const days = jsc.nat(365).generator();
     const result = addDays(d)(days);
-    const expected  = moment(d).add(days, 'days');
-    const error = `origin: ${d} add ${days}: expected(${expected.toDate()}) but the result is ${result.value}`;
-    expect(result.equals(expected.toDate()), error).to.be.true;
+    const expected  = add(d, days);
+    const error = `origin: ${d} add ${days}: expected(${expected}) but the result is ${result.value}`;
+
+    expect(result.equals(expected), error).to.be.true;
   });
   it('get monday of current date', () => {
-    d = new Date(2019, 8, 14);
     const result = getMonday(d);
-    const expected = moment(d).startOf('week').add(1, 'days');
-    const error = `origin: ${d} then expected(${expected.toDate()}) but the result is ${result.value}`;
-    expect(result.equals(expected.toDate()), error).to.be.true;
+    const error = `origin: ${d}  but the result is not a monday ${result.value}`;
+    expect(isMonday(result.value), error).to.be.true;
   });
   xit('expect given compare two dates work fine', () => {
 
