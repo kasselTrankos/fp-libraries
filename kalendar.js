@@ -1,5 +1,5 @@
-import {tagged} from 'daggy';
-import {add, tz, monday} from './utils/date';
+import {monday, add} from './lib/date';
+import {kalendar} from './lib/kalendar';
 // import {substract, lt, compose} from './utils';
 // import {cast, clone, midnight, moveToDate, toDay,
 //   getDate, plusDays, timezone} from './utils/date.utils';
@@ -20,27 +20,6 @@ const midnight = date => new Date(date.setHours(0,0,0,0));
 
 
 
-const kalendar = tagged('kalendar', ['value']);
-
-kalendar.prototype.concat = function(that) {
-  return kalendar(new Date(this.value.getTime() + that.getTime()));
-};
-kalendar.empty = function() {
-  return new Date(0);
-};
-kalendar.prototype.equals = function(that) {
-  return this.value.getTime() === that.getTime();
-};
-kalendar.prototype.format = function(format) {
-  const {value} = this.concat(tz.f(this.value));
-  const zero = value => value < 10 ? `0${value}`: value;
-  const dayMonthYear = `${zero(value.getDate())}/${zero(value.getMonth() + 1)}/${value.getFullYear()}`;
-  const hourMinuteSecond = `${zero(value.getHours())}:${zero(value.getMinutes())}:${zero(value.getSeconds())}`;
-  return `${dayMonthYear} ${hourMinuteSecond}`;
-};
-kalendar.prototype.map = function(f) {
-  return kalendar(f(this.value));
-};
 
 // const Midnight = ToDate(x=> new Date(x))
 //   .contramap(tz).contramap(midnight).contramap(clone);
