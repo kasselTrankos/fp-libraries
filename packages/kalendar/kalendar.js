@@ -1,4 +1,4 @@
-import {monday, add} from './lib/date';
+import {monday, add, tz} from './lib/date';
 import {kalendar} from './lib/kalendar';
 // import {substract, lt, compose} from './utils';
 // import {cast, clone, midnight, moveToDate, toDay,
@@ -13,7 +13,7 @@ import {kalendar} from './lib/kalendar';
 // }
 
 
-const midnight = date => new Date(date.setHours(0,0,0,0));
+
 
 
 
@@ -74,10 +74,13 @@ const midnight = date => new Date(date.setHours(0,0,0,0));
           // console.log(timezone(new Date()), '.......');
           
           // console.log(getDate.f(1100));
+const midnight = date => new Date(date.setHours(0,0,0,0));
+console.log(midnight);
+export const isBefore = (date = new Date()) => toCompare => 
+  kalendar(date).lte(toCompare);
 export const addDays =  (date = new Date())  => days => kalendar(date)
+  // .concat(tz.f(date))
   .concat(add.f(days))
-  // .concat(tz.f());
-
 export const getMonday = (date = new Date()) => kalendar(date)
   .map(midnight)
   .concat(monday.f(date));

@@ -12,22 +12,23 @@ describe('KALENDAR', () => {
     d = jsc.datetime(from, to).generator();
 
   });
-  it(`Add Dayss is working fine`, () => {
-    const m = new Date(2019, 8, 10,22,46,57);
-    d = m;
-    const days = 6;//jsc.nat(365).generator();
+  it(`expect given any date then add days`, () => {
+    // d = new Date(2019, 7, 19, 0, 38, 31);
+    const days = jsc.nat(365).generator();
     const result = addDays(d)(days);
     const expected  = moment(d).add(days, 'days');
     const error = `origin: ${d} add ${days}: expected(${expected.toDate()}) but the result is ${result.value}`;
     expect(result.equals(expected.toDate()), error).to.be.true;
   });
   it('get monday of current date', () => {
+    d = new Date(2019, 8, 14);
     const result = getMonday(d);
     const expected = moment(d).startOf('week').add(1, 'days');
-    // console.log(week.format(), expected, d);
     const error = `origin: ${d} then expected(${expected.toDate()}) but the result is ${result.value}`;
-
     expect(result.equals(expected.toDate()), error).to.be.true;
+  });
+  xit('expect given compare two dates work fine', () => {
+
   });
   // it(`remove xx Dayss is working fine`, () => {
   //   const add = jsc.nat(365).generator();
