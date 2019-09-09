@@ -4,10 +4,8 @@ const kalendar = tagged('kalendar', ['value']);
 const zero = value => value < 10 ? `0${value}`: value;
 
 kalendar.prototype.concat = function(that) {
-  const all = new Date(this.value.getTime() + that.getTime());
-  const isDifferentTimezones = Math.abs(all.getTimezoneOffset()) != Math.abs(this.value.getTimezoneOffset());
-  const tmz = all.getTimezoneOffset() * 60 * 1000 * -1;
-  return kalendar(isDifferentTimezones ? new Date(all.getTime() + tmz) : all);
+  console.log(that.getDate());
+  return kalendar(new Date(+this.value + +that));
 };
 kalendar.empty = function() {
   return new Date(0);
@@ -22,7 +20,7 @@ kalendar.prototype.format = function(format) {
   return `${dayMonthYear} ${hourMinuteSecond}`;
 };
 kalendar.prototype.map = function(f) {
-  return kalendar(f(this.value));
+  return kalendar(new Date(f(this.value)));
 };
 
 kalendar.prototype.lte = function (that) {

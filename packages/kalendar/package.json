@@ -18,6 +18,7 @@
     "chai": "^4.2.0",
     "daggy": "^1.4.0",
     "date-fns": "^2.0.1",
+    "date-fns-tz": "^1.0.7",
     "fantasy-land": "^4.0.1",
     "fantasy-laws": "^1.2.0",
     "jsverify": "^0.8.4",
