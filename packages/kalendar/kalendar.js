@@ -1,13 +1,12 @@
 import {date} from './lib/date';
 import {kalendar} from './lib/kalendar';
+import { concat } from 'fantasy-land';
 
 // const addDays = value => new Date(new Date(0).setDate(new Date(0).getDate() + value));
 
 const daysToMilliseconds = days => days * 60 * 60 * 24 * 1000;
 
-const add = date(d => new Date(d))
-  .contramap(d => new Date(0).setDate(d))
-  .contramap(days => new Date(0).getDate() + days);
+
 // const tz = date(dateIO).contramap(date => date.valueOf() + date.getTimezoneOffset() * 60 * 1000 * -1);
 // const monday = date(dateIO)
 //   .contramap(date => daysToMilliseconds(date.getDay() - (date.getDay() === 0 ? -6 : 1)) * -1);
@@ -85,12 +84,20 @@ const add = date(d => new Date(d))
           // console.log(timezone(new Date()), '.......');
           
           // console.log(getDate.f(1100));
-const midnight = date => new Date(date.setHours(0,0,0,0));
+// const midnight = date => new Date(date.setHours(0,0,0,0));
 // export const isBefore = (date = new Date()) => toCompare => 
   // kalendar(date).lte(toCompare);
-export const addDays =  (date)  => days => kalendar(date)
-  // .concat(tz.f(date))
-  .map(d =>new Date(d).setDate(d.getDate() + days));
+const sumDays = val => {
+  return {
+    value: val,
+    concat: d => new Date(new Date(d).setDate(d.getDate() + val)),
+    empty: () => new Date(0),
+  }
+}
+// const add = days => date(d => new Date(d))
+  // .contramap(d => new Date(date).setDate(d))
+  // .contramap(_date => new Date(_date).setDate(_date.getDate() + days));
+export const addDays = date  => days => sumDays(days).concat(date);
 // export const getMonday = (date = new Date()) => kalendar(date)
 //   .map(midnight)
 //   .concat(monday.f(date));
