@@ -1,7 +1,5 @@
 import {date} from './lib/date';
-import {kalendar} from './lib/kalendar';
-import { concat } from 'fantasy-land';
-
+import {compose} from './utils'
 // const addDays = value => new Date(new Date(0).setDate(new Date(0).getDate() + value));
 
 const daysToMilliseconds = days => days * 60 * 60 * 24 * 1000;
@@ -87,18 +85,23 @@ const daysToMilliseconds = days => days * 60 * 60 * 24 * 1000;
 // const midnight = date => new Date(date.setHours(0,0,0,0));
 // export const isBefore = (date = new Date()) => toCompare => 
   // kalendar(date).lte(toCompare);
-const sumDays = val => {
-  return {
-    value: val,
-    concat: d => new Date(new Date(d).setDate(d.getDate() + val)),
-    empty: () => new Date(0),
-  }
-}
+const sumDays = date => ({
+  value: date,
+  concat: days => new Date(new Date(date).setDate(date.getDate() + days)),
+  empty: () => new Date(0),
+});
+const daysUntilMonday = value => value.getDay() - (value.getDay() === 0 ? -6 : 1);
+const toNegative = value => value * -1;
+const monday = date(d =>new Date(d))
+  .contramap(({value, concat}) =>compose(daysUntilMonday, x => x  * -1, concat)(value))
+  .contramap(sumDays)
+  .contramap(date => new Date(date.setHours(0,0,0,0)));
+// .
 // const add = days => date(d => new Date(d))
   // .contramap(d => new Date(date).setDate(d))
   // .contramap(_date => new Date(_date).setDate(_date.getDate() + days));
-export const addDays = date  => days => sumDays(days).concat(date);
-// export const getMonday = (date = new Date()) => kalendar(date)
+export const addDays = date => days => sumDays(date).concat(days);
+export const getMonday = date => monday.f(date);
 //   .map(midnight)
 //   .concat(monday.f(date));
           // console.log(tz(new Date()), 'f00sdf0sdf0fds')
