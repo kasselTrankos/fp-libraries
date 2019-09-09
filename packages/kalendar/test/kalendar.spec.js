@@ -1,4 +1,4 @@
-import {addDays} from './../kalendar';
+import {addDays, getMonday} from './../kalendar';
 import { addDays as  add, isMonday } from 'date-fns';
 import {expect} from 'chai';
 import jsc from 'jsverify';
@@ -8,7 +8,7 @@ describe('KALENDAR', (done) => {
   const from = new Date(now.setDate(now.getDate()-jsc.integer(0, 1100).generator()));
   const to = new Date(now.setDate(now.getDate()+jsc.integer(0, 100).generator()));
   it(`expect given any date then add days`, () => {
-    for(let i = 0; i< 61220; i++) {
+    for(let i = 0; i< 20; i++) {
       const days = jsc.nat(365).generator();
       const d = jsc.datetime(from, to).generator();
       const result = addDays(d)(days);
@@ -20,12 +20,12 @@ describe('KALENDAR', (done) => {
     }  
     done;
   });
-  // xit('get monday of current date', () => {
-  //   const d = jsc.datetime(from, to).generator();
-  //   const result = getMonday(d);
-  //   const error = `origin: ${d}  but the result is not a monday ${result.value}`;
-  //   expect(isMonday(result.value), error).to.be.true;
-  // });
+  it('get monday of current date', () => {
+    const d = jsc.datetime(from, to).generator();
+    const result = getMonday(d);
+    const error = `origin: ${d}  but the result is not a monday ${result}`;
+    expect(isMonday(result), error).to.be.true;
+  });
   xit('expect given compare two dates work fine', () => {
 
   });
