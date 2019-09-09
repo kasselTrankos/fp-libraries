@@ -1,5 +1,16 @@
-import {monday, add, tz} from './lib/date';
+import {date} from './lib/date';
 import {kalendar} from './lib/kalendar';
+
+// const addDays = value => new Date(new Date(0).setDate(new Date(0).getDate() + value));
+
+const daysToMilliseconds = days => days * 60 * 60 * 24 * 1000;
+
+const add = date(d => new Date(d))
+  .contramap(d => new Date(0).setDate(d))
+  .contramap(days => new Date(0).getDate() + days);
+// const tz = date(dateIO).contramap(date => date.valueOf() + date.getTimezoneOffset() * 60 * 1000 * -1);
+// const monday = date(dateIO)
+//   .contramap(date => daysToMilliseconds(date.getDay() - (date.getDay() === 0 ? -6 : 1)) * -1);
 // import {substract, lt, compose} from './utils';
 // import {cast, clone, midnight, moveToDate, toDay,
 //   getDate, plusDays, timezone} from './utils/date.utils';
@@ -75,15 +86,14 @@ import {kalendar} from './lib/kalendar';
           
           // console.log(getDate.f(1100));
 const midnight = date => new Date(date.setHours(0,0,0,0));
-console.log(midnight);
-export const isBefore = (date = new Date()) => toCompare => 
-  kalendar(date).lte(toCompare);
+// export const isBefore = (date = new Date()) => toCompare => 
+  // kalendar(date).lte(toCompare);
 export const addDays =  (date)  => days => kalendar(date)
   // .concat(tz.f(date))
-  .concat(add.f(days))
-export const getMonday = (date = new Date()) => kalendar(date)
-  .map(midnight)
-  .concat(monday.f(date));
+  .map(d =>new Date(d).setDate(d.getDate() + days));
+// export const getMonday = (date = new Date()) => kalendar(date)
+//   .map(midnight)
+//   .concat(monday.f(date));
           // console.log(tz(new Date()), 'f00sdf0sdf0fds')
           // addDays(date)(firstDay(date));
           
