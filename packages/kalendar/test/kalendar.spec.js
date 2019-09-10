@@ -5,7 +5,7 @@ import { addDays as  add, isMonday,
 import {expect} from 'chai';
 import jsc from 'jsverify';
 
-describe('KALENDAR', (done) => {
+describe('KALENDAR', () => {
   const now =  new Date();
   const from = new Date(now.setDate(now.getDate()-jsc.integer(0, 1100).generator()));
   const to = new Date(now.setDate(now.getDate()+jsc.integer(0, 100).generator()));
@@ -18,22 +18,20 @@ describe('KALENDAR', (done) => {
 
       const error = `origin: ${d} add ${days}: expected(${expected}) but the result is (${result})`;
       expect(result.getTime() === expected.getTime(), error).to.be.true;
-      
-    }  
-    done;
+    } 
   });
   it('getMonday', () => {
     const d = jsc.datetime(from, to).generator();
     const result = getMonday(d);
     const error = `origin: ${d}  but the result is not a monday ${result}`;
+
     expect(isMonday(result), error).to.be.true;
   });
   it('equals', () => {
     const d = jsc.datetime(from, to).generator();
     const error = `date ${d}  and date ${d} must be the same`;
+
     expect(equals(d)(d), error).to.be.true;
-    
-    
   });
   it(`getWeek`, () => {
     const d = jsc.datetime(from, to).generator();

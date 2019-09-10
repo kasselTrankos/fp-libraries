@@ -1,18 +1,9 @@
-import {date} from './lib/date';
+import {kalendar} from './lib/kalendar';
 import {compose} from './utils';
+import {clone, midnight} from './utils/date';
 import {Equivalence} from './lib/Equivalence';
-// const addDays = value => new Date(new Date(0).setDate(new Date(0).getDate() + value));
 
 // const tz = date(dateIO).contramap(date => date.valueOf() + date.getTimezoneOffset() * 60 * 1000 * -1);
-// const monday = date(dateIO)
-//   .contramap(date => daysToMilliseconds(date.getDay() - (date.getDay() === 0 ? -6 : 1)) * -1);
-// import {substract, lt, compose} from './utils';
-// import {cast, clone, midnight, moveToDate, toDay,
-//   getDate, plusDays, timezone} from './utils/date.utils';
-// import {ToDate} from './utils/toDate';
-// import {Equivalence} from './utils/Equivalence';
-// import { fun } from 'jsverify';
-
 
 // const months = {
 //   es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
@@ -26,9 +17,6 @@ import {Equivalence} from './lib/Equivalence';
 
 
 
-
-// const Midnight = ToDate(x=> new Date(x))
-//   .contramap(tz).contramap(midnight).contramap(clone);
 
 // const isLower = Equivalence((x, y) => lt(x)(y))
 //   .contramap(cast).contramap(tz).contramap(clone);
@@ -66,20 +54,6 @@ import {Equivalence} from './lib/Equivalence';
       
       
       
-      // function kalendar(value = new Date()) {
-        //   return {
-          //     value: value,
-          
-          //     empty: () => kalendar(new Date(0)),
-          
-          //     concat: (that) => kalendar(tz(new Date(value.getTime() + that.getTime()))),
-          //   }
-          // };
-          // const tz = date => kalendar(date).concat({getTime: () => date.getTimezoneOffset() * 60 * 1000 * -1})
-          // console.log(timezone(new Date()), '.......');
-          
-          // console.log(getDate.f(1100));
-// const midnight = date => new Date(date.setHours(0,0,0,0));
 // export const isBefore = (date = new Date()) => toCompare => 
   // kalendar(date).lte(toCompare);
 const days = date => ({
@@ -89,17 +63,15 @@ const days = date => ({
 });
 const daysUntilMonday = value => value.getDay() - (value.getDay() === 0 ? -6 : 1);
 const fillDays = length => date => Array.from({length}, (_, i) => days(date).concat(i));
-const midnight = date => new Date(date.setHours(0,0,0,0));
 const invert = value => value * - 1;
-const clone = date => new Date(date);
-const monday = date(d => compose(daysUntilMonday, invert, days(d).concat)(d))
+const monday = kalendar(d => compose(daysUntilMonday, invert, days(d).concat)(d))
   .contramap(midnight)
   .contramap(clone);
 const isEquals = Equivalence((x, y) => x === y)
   .contramap(d => d.getTime())
   .contramap(midnight)
   .contramap(clone);
-const week = date(fillDays(7))
+const week = kalendar(fillDays(7))
   .contramap(monday.f);
 
 // .
