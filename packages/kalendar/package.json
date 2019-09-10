@@ -1,6 +1,6 @@
 {
   "name": "@functional-lib/kalendar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "kalendar fp",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "ramda-fantasy",
     "ramda",
     "fantasy"
-],
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
