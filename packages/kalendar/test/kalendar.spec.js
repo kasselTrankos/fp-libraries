@@ -1,4 +1,4 @@
-import {addDays, getMonday, equals,  getWeek} from './../kalendar';
+import {addDays, getMonday, equals, lte,  getWeek} from './../kalendar';
 import { addDays as  add, isMonday,
   isTuesday, isWednesday, isThursday, isFriday, isSaturday,
   isSunday } from 'date-fns';
@@ -32,6 +32,13 @@ describe('KALENDAR', () => {
     const error = `date ${d}  and date ${d} must be the same`;
 
     expect(equals(d)(d), error).to.be.true;
+  });
+  it('lte', () => {
+    const d = jsc.datetime(from, to).generator();
+    const b = addDays(d)(1);
+    const error = `date ${d} is lower than ${b} must be the same`;
+
+    expect(lte(d)(b), error).to.be.true;
   });
   it(`getWeek`, () => {
     const d = jsc.datetime(from, to).generator();
