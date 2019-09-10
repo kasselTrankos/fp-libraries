@@ -34,5 +34,8 @@
     "moment-timezone": "^0.5.26",
     "sanctuary-type-classes": "^11.0.0"
   },
-  "gitHead": "6704e1a73daf09d4b4735299f65c80e730c1b222"
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "9e0b9aab00121b2a42328372bd153f5901cec7ac"
 }
