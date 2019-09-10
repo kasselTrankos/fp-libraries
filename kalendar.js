@@ -1,9 +1,7 @@
 import {date} from './lib/date';
-import {compose} from './utils'
+import {compose} from './utils';
+import {Equivalence} from './lib/Equivalence';
 // const addDays = value => new Date(new Date(0).setDate(new Date(0).getDate() + value));
-
-const daysToMilliseconds = days => days * 60 * 60 * 24 * 1000;
-
 
 // const tz = date(dateIO).contramap(date => date.valueOf() + date.getTimezoneOffset() * 60 * 1000 * -1);
 // const monday = date(dateIO)
@@ -31,8 +29,7 @@ const daysToMilliseconds = days => days * 60 * 60 * 24 * 1000;
 
 // const Midnight = ToDate(x=> new Date(x))
 //   .contramap(tz).contramap(midnight).contramap(clone);
-// const isSame = Equivalence((x, y) => x === y)
-//   .contramap(cast).contramap(Midnight.f).contramap(clone);
+
 // const isLower = Equivalence((x, y) => lt(x)(y))
 //   .contramap(cast).contramap(tz).contramap(clone);
 
@@ -85,23 +82,35 @@ const daysToMilliseconds = days => days * 60 * 60 * 24 * 1000;
 // const midnight = date => new Date(date.setHours(0,0,0,0));
 // export const isBefore = (date = new Date()) => toCompare => 
   // kalendar(date).lte(toCompare);
-const sumDays = date => ({
+const days = date => ({
   value: date,
-  concat: days => new Date(new Date(date).setDate(date.getDate() + days)),
+  concat: amount => new Date(new Date(date).setDate(date.getDate() + amount)),
   empty: () => new Date(0),
 });
 const daysUntilMonday = value => value.getDay() - (value.getDay() === 0 ? -6 : 1);
-const toNegative = value => value * -1;
-const monday = date(d =>new Date(d))
-  .contramap(({value, concat}) =>compose(daysUntilMonday, x => x  * -1, concat)(value))
-  .contramap(sumDays)
-  .contramap(date => new Date(date.setHours(0,0,0,0)));
+const fillDays = length => date => Array.from({length}, (_, i) => days(date).concat(i));
+const midnight = date => new Date(date.setHours(0,0,0,0));
+const invert = value => value * - 1;
+const clone = date => new Date(date);
+const monday = date(d => compose(daysUntilMonday, invert, days(d).concat)(d))
+  .contramap(midnight)
+  .contramap(clone);
+const isEquals = Equivalence((x, y) => x === y)
+  .contramap(d => d.getTime())
+  .contramap(midnight)
+  .contramap(clone);
+const week = date(fillDays(7))
+  .contramap(monday.f);
+
 // .
 // const add = days => date(d => new Date(d))
   // .contramap(d => new Date(date).setDate(d))
   // .contramap(_date => new Date(_date).setDate(_date.getDate() + days));
-export const addDays = date => days => sumDays(date).concat(days);
-export const getMonday = date => monday.f(date);
+export const addDays = date => days(date).concat;
+export const getMonday = monday.f;
+export const equals = dateA => dateB => isEquals.f(dateA, dateB);
+export const getWeek = week.f;
+
 //   .map(midnight)
 //   .concat(monday.f(date));
           // console.log(tz(new Date()), 'f00sdf0sdf0fds')
