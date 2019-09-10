@@ -1,4 +1,4 @@
-const {date} = require ('./../lib/date');
+const {kalendar} = require ('./../lib/kalendar');
 const laws = require('fantasy-laws');
 const jsc = require ('jsverify');
 
@@ -8,13 +8,13 @@ const {identity, composition} = laws.Contravariant( (a,b ) => {
   return a.f(g) === b.f(g);
 });
 const testComposition = composition(
-  jsc.bless({generator:() => date(x=> x +12)}),
+  jsc.bless({generator:() => kalendar(x=> x +12)}),
   jsc.bless({generator:() => x => x + 4}), 
   jsc.bless({generator:() => x => x + 4})
 );
-const testIdentity = identity(jsc.bless({generator:() => date(x=> x +12)}));
+const testIdentity = identity(jsc.bless({generator:() => kalendar(x=> x +12)}));
 
-describe('DATE LAND => ',  () => {
+describe('KALENDAR LAND => ',  () => {
   it('testComposition', testComposition);
   it('testIdentity', testIdentity);
 });
