@@ -4,4 +4,4 @@ node_js:
   - "8.11"
   - "10"
 script: bash test.sh
-before_install: 
+before_install: lint.sh
