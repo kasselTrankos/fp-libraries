@@ -5,8 +5,5 @@
   "requires": true,
   "devDependencies": {
     "lerna": "^3.15.0"
-  },
-  "dependencies": {
-    "eslint": "^6.3.0"
   }
 }
