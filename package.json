@@ -1,7 +1,7 @@
 {
   "name": "@functional-lib/hierarchy",
   "version": "1.0.4",
-  "description": "kalendar fp",
+  "description": "hierarchy fp",
   "main": "hierarchy.js",
   "scripts": {
     "test": "mocha --require @babel/register"
