@@ -1,1 +1,4 @@
-const init = true;
+const Any = (value) => ({
+  empty: false,
+  concat: () => value || false
+});
