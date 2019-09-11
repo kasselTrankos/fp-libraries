@@ -13,3 +13,4 @@ Uses **ramda-fantasy** to include Either.
 Made an approach of **jsverify** for robusts tests.
 
 (moment is only using in test **logic not!**)
+merge subtree (git merge --squash -s subtree --no-commit <BRANCH>)
