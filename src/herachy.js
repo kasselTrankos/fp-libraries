@@ -29,5 +29,5 @@ const getHerachy = (users = []) => {
   var yt = Herachy.of(users)
     .children(is('high')(prop('type')))
     .join();
-}
+};
 export {getHerachy};

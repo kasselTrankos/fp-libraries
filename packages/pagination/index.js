@@ -20,8 +20,7 @@ const getPagination = (total = 0) => (size = 6) => (limit = 14) => (page = 1) =>
     fromEither([])(getRighOrLeft(isOverFirstPage)([{page: less(page)(1), text:'‹'}])),
     pages,
     fromEither([])(getRighOrLeft(isLessLastPage)([{page: add(page)(1), text:'›'}])),
-    fromEither([])(getRighOrLeft(isLessLastPage)([{page: end, text:'»'}])),
-  );
+    fromEither([])(getRighOrLeft(isLessLastPage)([{page: end, text:'»'}])));
 };
 
 export {getPagination};
