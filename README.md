@@ -6,6 +6,7 @@ Here is the study and test of two necessary flies logic, apply functional rules 
 
 - pagination: wich is use either rule functor.
 - kalendar: Obtains add an week days.
+- hierarchy: Parent and children hierarchy.
 
 
 Uses **ramda-fantasy** to include Either.
