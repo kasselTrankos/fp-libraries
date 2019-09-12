@@ -1,10 +1,11 @@
+import {taggedSum} from 'daggy';
 const Any = (value) => ({
   empty: false,
   concat: () => value || false
 });
 
 
-const Roles = daggy.taggedSum('Roles', {
+const Roles = taggedSum('Roles', {
   Parent: ['id'],
   Children: ['items'],
   Nil: []
