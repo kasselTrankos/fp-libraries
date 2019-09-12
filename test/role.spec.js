@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import jsc from 'jsverify';
-import {Roles} from './../src/role.js';
+import {Roles} from './../src/roles.js';
 
 describe('ROLE', () => {
 
