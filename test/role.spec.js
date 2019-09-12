@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import jsc from 'jsverify';
-import {Role} from './../src/role.js';
+import {Roles} from './../src/role.js';
 
 describe('ROLE', () => {
 
@@ -9,7 +9,7 @@ describe('ROLE', () => {
     {id: 4, parent: 1, name: 'david'},
     {id: 2, parent: 2, name: 'fred'}, 
     {id: 3, parent: 1, name:'george'}];
-    const role = Role.from(roles);
-    console.log('mmmmm', role);
+    const role = Roles.from(roles);
+    console.log('mmmmm', `${role}`);
   });
 });

@@ -1,39 +1,56 @@
 import {taggedSum, tagged} from 'daggy';
 
-const Person = tagged('Person', ['parent', 'children']);
-
-
-const Role = taggedSum('Role', {
-  Some: ['items'],
+const Person = tagged('Person', ['id', 'parent', 'name']);
+const Role = tagged('Role', ['parent', 'children']);
+const Roles = taggedSum('Roles', {
+  Some: [Role],
   Nil: []
 });
-const List = taggedSum('List', {
-  Cons: ['head', 'tail'], Nil: []
-})
 
 Role.prototype.concat = function(that) {
+  return Role(this.parent, [...this.children, ...that.children]);
+};
+Role.empty = function () {
+  return Role({}, []);
+};
+Role.prototype.equals = function (that) {
+  this.parent && that.parent && this.parent.id === that.parent.id;
+};
+
+Roles.prototype.filter = function (f) {
+  return this.cata({
+    Some: items => Roles.Some(items.filter(f)),
+    Nil: () => this
+  });
+};
+
+Roles.prototype.map = function (f) {
   return this.cata({
     Some: items => {
-      console.log(items);
+      return Roles.Some(items.map(f));
+    },
+    Nil: () => Roles.Nil
+  });
+}
 
-      return Role.Some(that);
+
+Roles.prototype.concat = function(that) {
+  return this.cata({
+    Some: items => {
+      const parent = items.find && items.find(x => x.equals(that));
+      return Roles.Some(parent ? parent.concat(that) : [...items, that]);
     },
     Nil: () => this
   });
 };
 
-Role.from = function(data) {
-  const parent = item => data.find(y=> y.id === item.parent);
-  const concat = item => Person(parent(item), item);
-  // role.concat(data.map(concat));
-  const role = Role.Some([]).concat(data.map(concat));
-  console.log(`${role}`);
-  return Role.Some([]).concat(data[0]).concat(data[1]);
-  // const els = data.reduceRight((acc, x) => Person(data.find(y=> y.id === x.parent), x), []);
-  // console.log(els, 'fdkshfgksdyhidlfskyfg');
-  // return Role.Some(data.reduceRight((acc, x) => Person(data.find(y=> y.id === x.parent), x), Person));
+Roles.from = function(data) {
+  return data.reduceRight((acc, x)=> {
+    const parent = data.find(y=> y.id === x.parent);
+    return acc.concat(Role(parent, x));
+  }, Roles.Some([]));
 };
-Role.prototype.toArray = function () {
+Roles.prototype.toArray = function () {
   return this.cata({
     Some: (x, acc) => [
       x, ... acc.toArray()
@@ -43,4 +60,4 @@ Role.prototype.toArray = function () {
   })
 }
 
-module.exports = {Role};
+module.exports = {Roles};
