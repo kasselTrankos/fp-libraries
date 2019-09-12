@@ -1,4 +1,4 @@
-import {taggedSum, tagged} from 'daggy';
+import {tagged} from 'daggy';
 
 const Person = tagged('Person', ['id', 'parent', 'name']);
 const Role = tagged('Role', ['parent', 'children']);

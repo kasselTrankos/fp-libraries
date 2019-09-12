@@ -25,9 +25,9 @@ Roles.prototype.map = function (f) {
 
 Roles.prototype.concat = function(that) {
   return this.cata({
-    Some: items => {
-      const parent = items.find && items.find(item => item.equals(that));
-      return Roles.Some(parent ? parent.concat(that) : [...items, that]);
+    Some: (items = []) => {
+      const parent = items.find(item => item.equals(that)) || [];
+      return Roles.Some([...items, ...parent.concat(that)]);
     },
     Nil: () => this
   });
