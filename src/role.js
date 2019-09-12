@@ -16,6 +16,10 @@ Role.empty = function () {
 Role.prototype.equals = function (that) {
   this.parent && that.parent && this.parent.id === that.parent.id;
 };
+Role.prototype.toObject = function () {
+  console.log(this.parent);
+  return {parent: this.parent, children: this.children};
+}
 
 Roles.prototype.filter = function (f) {
   return this.cata({
@@ -31,13 +35,13 @@ Roles.prototype.map = function (f) {
     },
     Nil: () => Roles.Nil
   });
-}
+};
 
 
 Roles.prototype.concat = function(that) {
   return this.cata({
     Some: items => {
-      const parent = items.find && items.find(x => x.equals(that));
+      const parent = items.find && items.find(item => item.equals(that));
       return Roles.Some(parent ? parent.concat(that) : [...items, that]);
     },
     Nil: () => this
@@ -52,12 +56,10 @@ Roles.from = function(data) {
 };
 Roles.prototype.toArray = function () {
   return this.cata({
-    Some: (x, acc) => [
-      x, ... acc.toArray()
-    ],
+    Some: items => items.reduceRight((acc, x) => acc.concat(x.toObject()), []),
 
     Nil: () => []
-  })
+  });
 }
 
 module.exports = {Roles};
