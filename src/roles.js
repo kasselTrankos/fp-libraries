@@ -5,6 +5,9 @@ const Roles = taggedSum('Roles', {
   Some: [Role],
   Nil: []
 });
+Roles.empty = function () {
+  return Roles.Some([]);
+}
 
 Roles.prototype.filter = function (f) {
   return this.cata({
@@ -33,7 +36,8 @@ Roles.prototype.concat = function(that) {
 };
 
 Roles.from = function(data) {
-  return data.reduceRight((acc, x)=> acc.concat(Role(data.find(y=> y.id === x.parent), x)), Roles.Some([]));
+  return data.reduceRight(
+    (acc, x)=> acc.concat(Role(data.find(y=> y.id === x.parent), x)), Roles.empty());
 };
 Roles.prototype.toArray = function () {
   return this.cata({
