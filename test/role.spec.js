@@ -14,6 +14,7 @@ describe('ROLE', () => {
     {id: 10, parent: 1, name: 'alfred'}];
     const role = Roles.from(roles);
     const parents = role.filter(x => !x.parent);
+    console.log(`${role}`);
     expect(parents.toArray().length).equal(3);
   });
 });

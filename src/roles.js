@@ -26,18 +26,14 @@ Roles.prototype.map = function (f) {
 Roles.prototype.concat = function(that) {
   return this.cata({
     Some: (items = []) => {
-      const parent = items.find(item => item.equals(that)) || [];
-      return Roles.Some([...items, ...parent.concat(that)]);
+      return Roles.Some([...items, that]);
     },
     Nil: () => this
   });
 };
 
 Roles.from = function(data) {
-  return data.reduceRight((acc, x)=> {
-    const parent = data.find(y=> y.id === x.parent);
-    return acc.concat(Role(parent, x));
-  }, Roles.Some([]));
+  return data.reduceRight((acc, x)=> acc.concat(Role(data.find(y=> y.id === x.parent), x)), Roles.Some([]));
 };
 Roles.prototype.toArray = function () {
   return this.cata({
