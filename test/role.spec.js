@@ -28,14 +28,15 @@ describe('ROLE', () => {
     {id: 10, parent: 1, name: 'alfred'}];
     const moneyLens = lensProp('parent');
     const data = [{ money: 42 }, { money: 1024 }, { money: 1337 }];
+    const fn = val => ({parent}) => equals(val)(parent);
     const r = 
-      map(console.log),
-      map(view(moneyLens))
+      // map(console.log),
+      compose(filter(equals(1)),  map(view(moneyLens)))
     (roles)
     // const r = compose(
     //   // map(over(moneyLens)(add('€ '))),
     //   filter(compose(equals(1), map(moneyLens)))
     // )(roles);
-    console.log(r);
+    console.log(r, filter(fn(1))(roles));
   });
 });
