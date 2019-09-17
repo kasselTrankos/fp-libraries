@@ -1,4 +1,4 @@
-import {taggedSum, tagged} from 'daggy';
+import {taggedSum} from 'daggy';
 import {Role} from './role';
 import {prop, equals, compose} from './../utils';
 
@@ -37,17 +37,10 @@ Roles.prototype.concat = function(that) {
 };
 
 Roles.from = function(data) {
-  const getId = prop('id');
-  const getParent = prop('parent');
-  // const isParent = ;
+  const id = prop('id');
+  const parent = prop('parent');
   return data.reduceRight(
-    (acc, x)=> acc.concat(Role(data.find(compose(equals(getParent(x)) ,getId)), x)), Roles.empty());
-};
-Roles.prototype.reduce = function(acc, x) {
-  return this.cata({
-    Some: list => Roles.Some(acc.concat(x)),
-    Nil: () => this 
-  });
+    (acc, x)=> acc.concat(Role(data.find(compose(equals(parent(x)) ,id)), x)), Roles.empty());
 };
 Roles.prototype.toArray = function () {
   return this.cata({
