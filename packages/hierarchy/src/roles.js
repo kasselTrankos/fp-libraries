@@ -8,7 +8,7 @@ const Roles = taggedSum('Roles', {
 });
 Roles.empty = function () {
   return Roles.Some([]);
-}
+};
 
 Roles.prototype.filter = function (f) {
   return this.cata({
