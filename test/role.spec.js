@@ -17,10 +17,9 @@ describe('ROLE', () => {
     {id: 10, parent: 1, name: 'alfred'}];
     const role = Roles.from(roles);
     const parents = role.filter(x => !x.parent);
-    console.log(role);
     expect(parents.toArray().length).equal(3);
   });
-  it('lens', ()=> {
+  it('with reduce and filter filter', ()=> {
     const roles = [{id: 1, name: 'fullsix'},
     {id: 4, parent: 1, name: 'david'},
     {id: 2, parent: 11, name: 'fred'}, 
@@ -31,24 +30,12 @@ describe('ROLE', () => {
     {id: 11, parent: 4, name: 'bruce'},
     {id: 9, name: 'mick'},
     {id: 10, parent: 1, name: 'alfred'}];
-    const pure = input => [input];
-    // const apply = functions => list =>
-    //   [ element | function <- functions,
-    //               element  <- map(function)(list)
-    //   ]
-
-    const _roles = Roles.empty();
     const parent = prop('parent');
     const id = prop('id');
-    const invertFilter = list => fn => find(fn)(list);
     const fn = from => to => equals(parent(from))(id(to));
-    const getParent = compose(invertFilter(roles), fn);
-    const madeRole = child => Role(getParent(child), child);
-    const _r = roles.reduce((xs, x) => xs.concat(madeRole(x)), Roles.empty());
-    const fm = map(madeRole)(roles);
-    //   // map(over(moneyLens)(add('€ '))),
-    //   filter(compose(equals(1), map(moneyLens)))
-    // )(roles);
-    console.log(_r.list);
+    const getParent = compose(find(roles), fn);
+    const made = child => Role(getParent(child), child);
+    const _r = roles.reduce((xs, x) => xs.concat(made(x)), Roles.empty());
+    expect(roles.length === _r.list.length).to.be.true;
   });
 });
