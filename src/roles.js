@@ -1,8 +1,9 @@
 import {taggedSum, tagged} from 'daggy';
 import {Role} from './role';
+import {prop, equals, compose} from './../utils';
 
 const Roles = taggedSum('Roles', {
-  Some: [Role],
+  Some: ['list'],
   Nil: []
 });
 Roles.empty = function () {
@@ -11,15 +12,15 @@ Roles.empty = function () {
 
 Roles.prototype.filter = function (f) {
   return this.cata({
-    Some: items => Roles.Some(items.filter(f)),
+    Some: list => Roles.Some(list.filter(f)),
     Nil: () => this
   });
 };
 
 Roles.prototype.map = function (f) {
   return this.cata({
-    Some: items => {
-      return Roles.Some(items.map(f));
+    Some: list => {
+      return Roles.Some(list.map(f));
     },
     Nil: () => Roles.Nil
   });
@@ -28,20 +29,23 @@ Roles.prototype.map = function (f) {
 
 Roles.prototype.concat = function(that) {
   return this.cata({
-    Some: (items = []) => {
-      return Roles.Some([...items, that]);
+    Some: (list = []) => {
+      return Roles.Some([...list, that]);
     },
     Nil: () => this
   });
 };
 
 Roles.from = function(data) {
+  const getId = prop('id');
+  const getParent = prop('parent');
+  // const isParent = ;
   return data.reduceRight(
-    (acc, x)=> acc.concat(Role(data.find(y=> y.id === x.parent), x)), Roles.empty());
+    (acc, x)=> acc.concat(Role(data.find(compose(equals(getParent(x)) ,getId)), x)), Roles.empty());
 };
 Roles.prototype.toArray = function () {
   return this.cata({
-    Some: items => items.reduceRight((acc, x) => acc.concat(x.toObject()), []),
+    Some: list => list.reduceRight((acc, x) => acc.concat(x.toObject()), []),
 
     Nil: () => []
   });
