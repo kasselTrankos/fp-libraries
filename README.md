@@ -13,4 +13,5 @@ Uses **ramda-fantasy** to include Either.
 Made an approach of **jsverify** for robusts tests.
 
 (moment is only using in test **logic not!**)
+must st¡udy how-to publish only one of all monorepos
 merge subtree (git merge --squash -s subtree --no-commit <BRANCH>)
