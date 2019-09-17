@@ -44,10 +44,11 @@ describe('ROLE', () => {
     const fn = from => to => equals(parent(from))(id(to));
     const getParent = compose(invertFilter(roles), fn);
     const madeRole = child => Role(getParent(child), child);
+    const _r = roles.reduce((xs, x) => xs.concat(madeRole(x)), Roles.empty());
     const fm = map(madeRole)(roles);
     //   // map(over(moneyLens)(add('€ '))),
     //   filter(compose(equals(1), map(moneyLens)))
     // )(roles);
-    console.log(fm, _roles.concat(fm[0]).concat(fm[1]), Roles.Some(fm));
+    console.log(_r.list);
   });
 });
