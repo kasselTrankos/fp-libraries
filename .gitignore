@@ -1,4 +1,7 @@
 node_modules
+<<<<<<< HEAD
 bower_components
 package-lock.json
 coverage
+=======
+>>>>>>> hierarchy

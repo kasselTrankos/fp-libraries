@@ -1,6 +1,6 @@
 {
   "name": "@functional-lib/hierarchy",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "description": "hierarchy fp",
   "main": "hierarchy.js",
   "scripts": {
@@ -37,7 +37,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "9e0b9aab00121b2a42328372bd153f5901cec7ac",
   "dependencies": {
     "eslint": "^6.3.0",
     "npm": "^6.11.3",
