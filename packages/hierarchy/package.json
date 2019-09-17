@@ -1,6 +1,6 @@
 {
   "name": "@functional-lib/hierarchy",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "hierarchy fp",
   "main": "hierarchy.js",
   "scripts": {
