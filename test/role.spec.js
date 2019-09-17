@@ -32,8 +32,8 @@ describe('ROLE', () => {
     {id: 10, parent: 1, name: 'alfred'}];
     const parent = prop('parent');
     const id = prop('id');
-    const fn = from => to => equals(parent(from))(id(to));
-    const getParent = compose(find(roles), fn);
+    const equal = to => from => equals(parent(to))(id(from));
+    const getParent = compose(find(roles), equal);
     const made = child => Role(getParent(child), child);
     const _r = roles.reduce((xs, x) => xs.concat(made(x)), Roles.empty());
     expect(roles.length === _r.list.length).to.be.true;
