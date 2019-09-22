@@ -1,3 +1,3 @@
 # Irrigation
 
-This control the irrigation tag.
+Uses the functor, monoid and identity algorithms.
