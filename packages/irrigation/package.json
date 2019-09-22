@@ -1,8 +1,8 @@
 {
-  "name": "@functional-lib/hierarchy",
+  "name": "@functional-lib/irrigation",
   "version": "1.0.6",
-  "description": "hierarchy fp",
-  "main": "hierarchy.js",
+  "description": "irrigation fp",
+  "main": "irrigation.js",
   "scripts": {
     "test": "mocha --require @babel/register"
   },
