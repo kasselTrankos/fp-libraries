@@ -1,6 +1,6 @@
 {
   "name": "@functional-lib/irrigation",
-  "version": "1.0.6",
+  "version": "1.0.0",
   "description": "irrigation fp",
   "main": "irrigation.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "keywords": [
     "tdd",
     "functional",
-    "tree decision",
+    "irrigation",
     "ramda-fantasy",
     "ramda",
     "fantasy"
