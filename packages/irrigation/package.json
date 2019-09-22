@@ -2,7 +2,7 @@
   "name": "@functional-lib/irrigation",
   "version": "1.0.4",
   "description": "irrigation fp",
-  "main": "src/irrigation.js",
+  "main": "src/Irrigation.js",
   "scripts": {
     "test": "mocha --require @babel/register"
   },
