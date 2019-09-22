@@ -15,3 +15,9 @@ Made an approach of **jsverify** for robusts tests.
 (moment is only using in test **logic not!**)
 must st¡udy how-to publish only one of all monorepos
 merge subtree (git merge --squash -s subtree --no-commit <BRANCH>)
+
+```
+git subtree split -P packages/{FOLDER_TO_SPLIT}  -b {BRANCH_NAME}
+git checkout {BRANCH_NAME}
+git push --set-upstream origin {BRANCH_NAME}
+```
