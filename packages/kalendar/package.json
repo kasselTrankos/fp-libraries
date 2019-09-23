@@ -1,6 +1,6 @@
 {
   "name": "@functional-lib/kalendar",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "kalendar fp",
   "main": "dist/kalendar.js",
   "scripts": {
@@ -38,9 +38,9 @@
   },
   "gitHead": "9e0b9aab00121b2a42328372bd153f5901cec7ac",
   "dependencies": {
+    "daggy": "^1.4.0",
     "eslint": "^6.3.0",
     "fantasy-land": "^4.0.1",
-    "daggy": "^1.4.0",
     "npm": "^6.11.3",
     "test": "^0.6.0"
   }
