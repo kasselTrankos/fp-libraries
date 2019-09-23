@@ -1,6 +1,6 @@
 {
   "name": "@functional-lib/irrigation",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "irrigation fp",
   "main": "dist/Irrigation.js",
   "scripts": {
@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "daggy": "^1.4.0",
-    "fantasy-land": "^4.0.1",
     "eslint": "^6.3.0",
+    "fantasy-land": "^4.0.1",
     "npm": "^6.11.3",
     "test": "^0.6.0"
   },
