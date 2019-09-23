@@ -1,6 +1,6 @@
 {
   "name": "@functional-lib/irrigation",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "irrigation fp",
   "main": "dist/Irrigation.js",
   "scripts": {
