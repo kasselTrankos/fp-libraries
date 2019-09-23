@@ -24,10 +24,8 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "chai": "^4.2.0",
-    "daggy": "^1.4.0",
     "date-fns": "^2.0.1",
     "date-fns-tz": "^1.0.7",
-    "fantasy-land": "^4.0.1",
     "fantasy-laws": "^1.2.0",
     "jsverify": "^0.8.4",
     "mocha": "^6.2.0",
@@ -41,6 +39,8 @@
   "gitHead": "9e0b9aab00121b2a42328372bd153f5901cec7ac",
   "dependencies": {
     "eslint": "^6.3.0",
+    "fantasy-land": "^4.0.1",
+    "daggy": "^1.4.0",
     "npm": "^6.11.3",
     "test": "^0.6.0"
   }
