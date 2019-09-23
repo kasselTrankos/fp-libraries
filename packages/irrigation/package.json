@@ -2,9 +2,11 @@
   "name": "@functional-lib/irrigation",
   "version": "1.0.5",
   "description": "irrigation fp",
-  "main": "src/Irrigation.js",
+  "main": "dist/Irrigation.js",
   "scripts": {
-    "test": "mocha --require @babel/register"
+    "test": "mocha --require @babel/register",
+    "build": "rm -rf dist && mkdir dist && babel -d ./dist ./src -s",
+    "prepublish": "rm -rf dist && mkdir dist && babel -d ./dist ./src -s"
   },
   "keywords": [
     "tdd",
