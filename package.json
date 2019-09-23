@@ -29,15 +29,15 @@
     "sanctuary-type-classes": "^11.0.0"
   },
   "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "9e0b9aab00121b2a42328372bd153f5901cec7ac",
+  "dependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "access": "public"
-  },
-  "gitHead": "9e0b9aab00121b2a42328372bd153f5901cec7ac",
-  "dependencies": {
     "daggy": "^1.4.0",
     "eslint": "^6.3.0",
     "fantasy-land": "^4.0.1",
