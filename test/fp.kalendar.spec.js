@@ -1,4 +1,4 @@
-const {kalendar} = require ('./../lib/kalendar');
+const {kalendar} = require ('./../lib/src/Kalendar');
 const laws = require('fantasy-laws');
 const jsc = require ('jsverify');
 

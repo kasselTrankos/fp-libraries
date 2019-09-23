@@ -1,4 +1,4 @@
-import {addDays, getMonday, equals, lte,  getWeek} from './../kalendar';
+import {addDays, getMonday, equals, lte,  getWeek} from './../src/Kalendar';
 import { addDays as  add, isMonday,
   isTuesday, isWednesday, isThursday, isFriday, isSaturday,
   isSunday } from 'date-fns';
