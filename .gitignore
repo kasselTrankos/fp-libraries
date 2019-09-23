@@ -1,3 +1,6 @@
 node_modules
 bower_components
 coverage
+prepublish.js
+bin
+dist
