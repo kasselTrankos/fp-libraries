@@ -1,7 +1,7 @@
-import {kalendar} from './lib/kalendar';
-import {date} from './lib/date';
-import {compose, invert} from './utils';
-import {clone, midnight, daysUntilMonday} from './utils/date';
+import {kalendar} from './../lib/kalendar';
+import {date} from './../lib/date';
+import {compose, invert} from './../utils';
+import {clone, midnight, daysUntilMonday} from './../utils/date';
 
 const day = date => ({
   value: date,

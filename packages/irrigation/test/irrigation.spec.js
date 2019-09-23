@@ -1,4 +1,4 @@
-import Irrigation from './../src/irrigation';
+import Irrigation from './../src/Irrigation';
 import laws from 'fantasy-laws';
 import jsc from 'jsverify';
 import Z from 'sanctuary-type-classes';
