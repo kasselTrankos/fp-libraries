@@ -1,0 +1,6 @@
+54 warn complete Waiting for 2 child processes to exit. CTRL-C to exit immediately.
+55 error Error: Command failed: git tag @functional-lib/hierarchy@1.0.6 -m @functional-lib/hierarchy@1.0.6
+55 error fatal: el tag '@functional-lib/hierarchy@1.0.6' ya existe
+55 error
+55 error     at makeError (/home/vera/.npm/_npx/20024/lib/node_modules/lerna/node_modules/execa/index.js:174:9)
+55 error     at Promise.all.then.arr (/home/vera/.npm/_npx/20024/lib/node_modules/lerna/node_modules/execa/index.js:278:16)
