@@ -18,11 +18,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/node": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
     "chai": "^4.2.0",
     "date-fns": "^2.0.1",
     "date-fns-tz": "^1.0.7",
@@ -34,6 +29,11 @@
     "sanctuary-type-classes": "^11.0.0"
   },
   "publishConfig": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "access": "public"
   },
   "gitHead": "9e0b9aab00121b2a42328372bd153f5901cec7ac",
