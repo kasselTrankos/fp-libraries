@@ -5,7 +5,7 @@
   "main": "dist/kalendar.js",
   "scripts": {
     "test": "mocha --require @babel/register",
-    "postinstall": "rm -rf dist && mkdir dist && babel -d ./dist ./src -s"
+    "postinstall": "rm -rf dist && ./node_modules/.bin/mkdir dist && babel -d ./dist ./src -s"
   },
   "keywords": [
     "tdd",
