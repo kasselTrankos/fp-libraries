@@ -2,10 +2,10 @@
   "name": "@functional-lib/kalendar",
   "version": "1.0.12",
   "description": "kalendar fp",
-  "main": "dist/Kalendar.js",
+  "main": "dist/src/Kalendar.js",
   "scripts": {
     "test": "mocha --require @babel/register",
-    "postinstall": "rm -rf dist && mkdir dist && babel -d ./dist ./src -s"
+    "postinstall": "rm -rf dist && mkdir dist && babel ./src -s -d ./dist/src && babel ./lib -s -d ./dist/lib && babel ./utils -s -d ./dist/utils"
   },
   "keywords": [
     "tdd",
