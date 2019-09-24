@@ -2,7 +2,7 @@
   "name": "@functional-lib/kalendar",
   "version": "1.0.9",
   "description": "kalendar fp",
-  "main": "dist/kalendar.js",
+  "main": "dist/Kalendar.js",
   "scripts": {
     "test": "mocha --require @babel/register",
     "postinstall": "rm -rf dist && mkdir dist && babel -d ./dist ./src -s"
