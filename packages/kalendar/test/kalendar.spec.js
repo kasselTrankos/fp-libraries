@@ -1,4 +1,4 @@
-import {addDays, getMonday, equals, lte,  getWeek} from './../src/Kalendar';
+import {addDays, getMonday, equals, lte,  getWeek, diffDays} from './../src/Kalendar';
 import { addDays as  add, isMonday,
   isTuesday, isWednesday, isThursday, isFriday, isSaturday,
   isSunday } from 'date-fns';
@@ -51,6 +51,13 @@ describe('KALENDAR', () => {
     expect(isFriday(friday), `${friday} must be friday`).to.be.true;
     expect(isSaturday(saturday), `${saturday} must be saturday`).to.be.true;
     expect(isSunday(sunday), `${sunday} must be sunday`).to.be.true;
+  });
+  it('diffDays', ()=> {
+    const d = jsc.datetime(from, to).generator();
+    const days = jsc.nat(365).generator();
+    const b = addDays(d)(days);
+    const result = diffDays(d)(b);
+    expect(result).equals(days);
   });
 
 });
