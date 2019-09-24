@@ -1,5 +1,4 @@
-import {kalendar} from './../lib/kalendar';
-import {date, diff} from './../lib/date';
+import {date, diff, weeks} from './../lib/date';
 import {compose, invert} from './../utils';
 import {clone, midnight, daysUntilMonday} from './../utils/date';
 
@@ -10,13 +9,13 @@ const day = date => ({
 });
 
 const fillDays = length => date => Array.from({length}, (_, i) => day(date).concat(i));
-const monday = kalendar(d => compose(daysUntilMonday, invert, day(d).concat)(d))
+const monday = weeks(d => compose(daysUntilMonday, invert, day(d).concat)(d))
   .contramap(midnight)
   .contramap(clone);
-const week = kalendar(fillDays(7))
+const week = weeks(fillDays(7))
   .contramap(monday.f);
 
-  const diffDate = diff((x, y) => x - y)
+const diffDate = diff((x, y) => x - y)
   .contramap(x=> new Date(x).getTime());
   
 const toDay = val => val / (24 * 60 * 60 * 1000);
