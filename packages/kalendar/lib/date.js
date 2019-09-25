@@ -8,7 +8,7 @@ date.prototype.lte = function (that) {
   return this.value.getTime() < that.getTime();
 };
 date.prototype.map = function (f) {
-  return date(f(value));
+  return date(f(this.value));
 };
 
 date.of = function (x) {
@@ -16,11 +16,11 @@ date.of = function (x) {
 };
 
 date.prototype.setMinutes = function (m) {
-  return date.of(new Date(value).setMinutes(m));
+  return date.of(new Date(this.value).setMinutes(m));
 };
 
 date.prototype.setHours = function (h) {
-  return date.of(new Date(value).setHours(h));
+  return date.of(new Date(this.value).setHours(h));
 };
 
 const diff = tagged('diff', ['f']);
