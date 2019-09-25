@@ -1,6 +1,6 @@
 {
   "name": "@functional-lib/kalendar",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "kalendar fp",
   "main": "dist/src/Kalendar.js",
   "scripts": {
