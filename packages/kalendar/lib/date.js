@@ -11,7 +11,7 @@ date.prototype.map = function (f) {
   return date(f(value));
 };
 
-date.prototype.of = function (x) {
+date.of = function (x) {
   return date(new Date(x));
 };
 
