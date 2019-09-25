@@ -10,6 +10,9 @@ date.prototype.lte = function (that) {
 date.prototype.map = function (f) {
   return date(f(this.value));
 };
+date.prototype.chain = function(f) {
+  return date(this.map(f)).value;
+}
 
 date.of = function (x) {
   return date(new Date(x));
