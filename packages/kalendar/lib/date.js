@@ -7,6 +7,21 @@ date.prototype.equals = function(that) {
 date.prototype.lte = function (that) {
   return this.value.getTime() < that.getTime();
 };
+date.prototype.map = function (f) {
+  return date(f(value));
+};
+
+date.prototype.of = function (x) {
+  return date(new Date(x));
+};
+
+date.prototype.setMinutes = function (m) {
+  return date.of(new Date(value).setMinutes(m));
+};
+
+date.prototype.setHours = function (h) {
+  return date.of(new Date(value).setHours(h));
+};
 
 const diff = tagged('diff', ['f']);
 diff.prototype.contramap = function(g) {

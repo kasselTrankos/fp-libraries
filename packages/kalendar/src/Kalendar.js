@@ -26,3 +26,4 @@ export const equals = dateA  => dateB => date(dateA).equals(dateB);
 export const lte = dateA  => dateB => date(dateA).lte(dateB);
 export const getWeek = week.f;
 export const diffDays = dateA => dateB => compose(toDay, Math.abs, Math.round)(diffDate.f(dateA, dateB));
+exports.date = date;
