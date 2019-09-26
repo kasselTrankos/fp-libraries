@@ -1,0 +1,47 @@
+{
+  "name": "@functional-lib/kalendar",
+  "version": "1.0.17",
+  "description": "kalendar fp",
+  "main": "dist/src/Kalendar.js",
+  "scripts": {
+    "test": "mocha --require @babel/register",
+    "postinstall": "rm -rf dist && mkdir dist && babel ./src -s -d ./dist/src && babel ./lib -s -d ./dist/lib && babel ./utils -s -d ./dist/utils"
+  },
+  "keywords": [
+    "tdd",
+    "functional",
+    "tree decision",
+    "ramda-fantasy",
+    "ramda",
+    "fantasy"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "date-fns": "^2.0.1",
+    "date-fns-tz": "^1.0.7",
+    "fantasy-laws": "^1.2.0",
+    "jsverify": "^0.8.4",
+    "mocha": "^6.2.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26",
+    "sanctuary-type-classes": "^11.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "9e0b9aab00121b2a42328372bd153f5901cec7ac",
+  "dependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "daggy": "^1.4.0",
+    "eslint": "^6.3.0",
+    "fantasy-land": "^4.0.1",
+    "npm": "^6.11.3",
+    "test": "^0.6.0"
+  }
+}
