@@ -27,7 +27,7 @@
     "fantasy-land": "^4.0.1",
     "fantasy-laws": "^1.2.0",
     "jsverify": "^0.8.4",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "sanctuary-type-classes": "^11.0.0"
   },
   "publishConfig": {
